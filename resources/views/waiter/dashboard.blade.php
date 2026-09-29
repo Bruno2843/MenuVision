@@ -3,12 +3,27 @@
 @section('title', 'Mozo · Pedidos')
 
 @section('content')
-    <div class="mb-6">
-        <h1 class="text-2xl font-bold">Pedidos del mozo</h1>
-        <p class="text-sm text-gray-500">Aquí se revisarán y confirmarán los pedidos de las mesas.</p>
+    <div class="mb-6 flex flex-wrap items-center justify-between gap-3">
+        <div>
+            <h1 class="text-2xl font-bold text-white">Pedidos del mozo</h1>
+            <p class="text-sm text-gray-400">Revisá y confirmá los pedidos de las mesas.</p>
+        </div>
+
+        <a
+            href="{{ route('waiter.orders.create') }}"
+            class="rounded-lg bg-gold-500 px-4 py-2 text-sm font-semibold text-black transition hover:bg-gold-600"
+        >
+            Tomar pedido
+        </a>
     </div>
 
-    <div class="rounded-xl border border-dashed border-gray-300 bg-white p-8 text-center text-gray-400">
-        El panel del mozo se implementará en una etapa posterior.
+    @if (session('status'))
+        <div class="mb-4 rounded-lg border border-green-900 bg-green-950 px-4 py-3 text-sm text-green-300">
+            {{ session('status') }}
+        </div>
+    @endif
+
+    <div data-poll-url="{{ route('waiter.board') }}">
+        @include('waiter.partials.board')
     </div>
 @endsection

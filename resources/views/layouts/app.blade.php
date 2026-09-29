@@ -9,11 +9,11 @@
 
     @vite(['resources/css/app.css', 'resources/js/app.js'])
 </head>
-<body class="bg-gray-50 font-sans text-gray-900 antialiased">
-    <header class="border-b border-gray-200 bg-white">
+<body class="bg-gray-950 font-sans text-gray-100 antialiased">
+    <header class="border-b border-gold-600/40 bg-black">
         <div class="mx-auto flex max-w-3xl items-center justify-between px-4 py-4">
-            <a href="{{ url('/') }}" class="text-xl font-bold text-gray-900">MenuVision</a>
-            <span class="text-sm text-gray-500">Menú digital</span>
+            <a href="{{ url('/') }}" class="text-xl font-bold text-gold-400">MenuVision</a>
+            <span class="text-sm text-gray-400">Menú digital</span>
         </div>
     </header>
 

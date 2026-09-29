@@ -4,11 +4,19 @@
 
 @section('content')
     <div class="mb-6">
-        <h1 class="text-2xl font-bold">Cocina</h1>
-        <p class="text-sm text-gray-500">Aquí se gestionará la preparación de los pedidos confirmados.</p>
+        <h1 class="text-2xl font-bold text-white">Cocina</h1>
+        <p class="text-sm text-gray-400">
+            Pedidos confirmados por el mozo, de la preparación a la entrega.
+        </p>
     </div>
 
-    <div class="rounded-xl border border-dashed border-gray-300 bg-white p-8 text-center text-gray-400">
-        El panel de cocina se implementará en una etapa posterior.
+    @if (session('status'))
+        <div class="mb-4 rounded-lg border border-green-900 bg-green-950 px-4 py-3 text-sm text-green-300">
+            {{ session('status') }}
+        </div>
+    @endif
+
+    <div data-poll-url="{{ route('kitchen.board') }}">
+        @include('kitchen.partials.board')
     </div>
 @endsection

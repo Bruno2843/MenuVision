@@ -20,6 +20,7 @@ class CategoryFactory extends Factory
         return [
             'nombre' => fake()->unique()->word(),
             'descripcion' => fake()->sentence(),
+            'orden' => fake()->numberBetween(1, 50),
         ];
     }
 }

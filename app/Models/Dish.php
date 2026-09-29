@@ -2,17 +2,20 @@
 
 namespace App\Models;
 
+use Database\Factories\DishFactory;
 use Illuminate\Database\Eloquent\Attributes\Fillable;
+use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\BelongsToMany;
+use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Database\Eloquent\Relations\HasOne;
 
-#[Fillable(['category_id', 'nombre', 'descripcion', 'precio', 'disponible'])]
+#[Fillable(['category_id', 'nombre', 'descripcion', 'precio', 'disponible', 'orden'])]
 class Dish extends Model
 {
-    /** @use HasFactory<\Database\Factories\DishFactory> */
+    /** @use HasFactory<DishFactory> */
     use HasFactory;
 
     /**
@@ -40,6 +43,32 @@ class Dish extends Model
     }
 
     /**
+     * @return HasMany<OrderItem>
+     */
+    public function items(): HasMany
+    {
+        return $this->hasMany(OrderItem::class);
+    }
+
+    /**
+     * Order the dishes the way they should appear inside their category.
+     *
+     * @param  Builder<Dish>  $query
+     */
+    public function scopeOrdered(Builder $query): void
+    {
+        $query->orderBy('orden')->orderBy('nombre');
+    }
+
+    /**
+     * @param  Builder<Dish>  $query
+     */
+    public function scopeDisponibles(Builder $query): void
+    {
+        $query->where('disponible', true);
+    }
+
+    /**
      * @return array<string, string>
      */
     protected function casts(): array
@@ -47,6 +76,7 @@ class Dish extends Model
         return [
             'precio' => 'decimal:2',
             'disponible' => 'boolean',
+            'orden' => 'integer',
         ];
     }
 }

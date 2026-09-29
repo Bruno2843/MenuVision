@@ -24,6 +24,17 @@ class DishFactory extends Factory
             'descripcion' => fake()->sentence(),
             'precio' => fake()->randomFloat(2, 5, 40),
             'disponible' => true,
+            'orden' => fake()->numberBetween(1, 50),
         ];
+    }
+
+    /**
+     * Indicate that the dish is out of stock.
+     */
+    public function agotado(): static
+    {
+        return $this->state(fn (array $attributes) => [
+            'disponible' => false,
+        ]);
     }
 }

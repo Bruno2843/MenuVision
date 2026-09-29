@@ -2,7 +2,9 @@
 
 namespace App\Models;
 
+use App\Enums\OrderStatus;
 use App\Enums\TableStatus;
+use Database\Factories\TableFactory;
 use Illuminate\Database\Eloquent\Attributes\Fillable;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
@@ -12,7 +14,7 @@ use Illuminate\Database\Eloquent\Relations\HasOne;
 #[Fillable(['numero', 'estado'])]
 class Table extends Model
 {
-    /** @use HasFactory<\Database\Factories\TableFactory> */
+    /** @use HasFactory<TableFactory> */
     use HasFactory;
 
     /**
@@ -29,6 +31,17 @@ class Table extends Model
     public function qrCode(): HasOne
     {
         return $this->hasOne(QRCode::class);
+    }
+
+    /**
+     * Whether the table still has orders the staff are working on. A table
+     * without open orders can be released.
+     */
+    public function hasOpenOrders(): bool
+    {
+        return $this->orders()
+            ->whereIn('estado', OrderStatus::open())
+            ->exists();
     }
 
     /**
