@@ -16,5 +16,6 @@ chmod -R 775 storage bootstrap/cache database
 
 php artisan config:clear
 php artisan migrate --force
+php artisan db:seed --class=UserSeeder --force
 
 exec apache2-foreground
