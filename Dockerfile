@@ -4,7 +4,8 @@ RUN apt-get update && apt-get install -y \
     git unzip libzip-dev libsqlite3-dev \
     libpng-dev libjpeg62-turbo-dev libfreetype6-dev \
     libonig-dev curl nodejs npm \
-    && docker-php-ext-install pdo pdo_sqlite mbstring zip \
+    && docker-php-ext-configure gd --with-freetype --with-jpeg \
+&& docker-php-ext-install pdo pdo_sqlite mbstring zip gd \
     && a2enmod rewrite \
     && rm -rf /var/lib/apt/lists/*
 
@@ -25,13 +26,12 @@ RUN sed -i 's#/var/www/html#/var/www/html/public#g' \
     && printf '<Directory /var/www/html/public>\nAllowOverride All\nRequire all granted\n</Directory>\n' \
     > /etc/apache2/conf-available/laravel.conf \
     && a2enconf laravel
-
 RUN mkdir -p storage/framework/cache \
     storage/framework/sessions \
     storage/framework/views \
     storage/logs bootstrap/cache \
-    && chown -R www-data:www-data storage bootstrap/cache \
-    && chmod -R 775 storage bootstrap/cache
+    && chown -R www-data:www-data storage bootstrap/cache database \
+    && chmod -R 775 storage bootstrap/cache database
 
 COPY docker-entrypoint.sh /usr/local/bin/docker-entrypoint.sh
 RUN chmod +x /usr/local/bin/docker-entrypoint.sh
