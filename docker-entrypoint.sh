@@ -11,7 +11,8 @@ mkdir -p storage/framework/cache \
 
 touch database/database.sqlite
 
-chown -R www-data:www-data storage bootstrap/cache database/database.sqlite
+chown -R www-data:www-data storage bootstrap/cache database
+chmod -R 775 storage bootstrap/cache database
 
 php artisan config:clear
 php artisan migrate --force
