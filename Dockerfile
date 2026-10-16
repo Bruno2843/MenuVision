@@ -35,6 +35,8 @@ RUN mkdir -p storage/framework/cache \
 
 COPY docker-entrypoint.sh /usr/local/bin/docker-entrypoint.sh
 RUN chmod +x /usr/local/bin/docker-entrypoint.sh
+RUN printf "upload_max_filesize=64M\npost_max_size=80M\nmax_execution_time=300\nmax_input_time=300\n" \
+    > /usr/local/etc/php/conf.d/uploads.ini
 
 EXPOSE 80
 
