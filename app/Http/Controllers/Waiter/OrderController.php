@@ -13,8 +13,10 @@ use App\Models\Dish;
 use App\Models\Order;
 use App\Models\OrderItem;
 use App\Models\Table;
+use App\Support\TableQr;
 use Illuminate\Database\Eloquent\Relations\Relation;
 use Illuminate\Http\RedirectResponse;
+use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Illuminate\View\View;
 
@@ -61,9 +63,25 @@ class OrderController extends Controller
 
     /**
      * Show the form to take a new order for a table.
+     *
+     * The table comes from the scanner when the form is reached from it: the
+     * query parameter is the code the camera read, and the table is resolved
+     * from the stored QR here rather than accepted as an id, so the form cannot
+     * be pointed at a table the waiter never scanned. A code that does not
+     * resolve sends the waiter back to the dashboard with the reason instead of
+     * showing an order form for no table.
      */
-    public function create(): View
+    public function create(Request $request): View|RedirectResponse
     {
+        $codigo = trim((string) $request->query('codigo', ''));
+        $table = $codigo === '' ? null : TableQr::resolver($codigo)['table'] ?? null;
+
+        if ($codigo !== '' && $table === null) {
+            return redirect()
+                ->route('waiter.dashboard')
+                ->with('error', 'Ese código QR no corresponde a ninguna mesa.');
+        }
+
         $categories = Category::query()
             ->ordered()
             ->with(['dishes' => fn (Relation $dishes) => $dishes->disponibles()->ordered()])
@@ -72,20 +90,29 @@ class OrderController extends Controller
 
         return view('waiter.orders.create', [
             'categories' => $categories,
-            'tables' => Table::query()->orderBy('numero')->get(),
+            'tables' => $table === null ? Table::query()->orderBy('numero')->get() : collect([$table]),
+            // Non-null when the form was reached through the scanner: the table
+            // is then shown as resolved and cannot be changed.
+            'table' => $table,
+            'codigoQr' => $codigo === '' ? null : $codigo,
         ]);
     }
 
     /**
      * Store a new order with the dishes chosen by the waiter.
+     *
+     * The table is the one the request resolves (from the scanned code when there
+     * is one) and the waiter is the signed-in account, never a value the browser
+     * supplied.
      */
     public function store(StoreOrderRequest $request): RedirectResponse
     {
         $validated = $request->validated();
 
-        $order = DB::transaction(function () use ($validated): Order {
+        $order = DB::transaction(function () use ($validated, $request): Order {
             $order = Order::create([
-                'table_id' => $validated['table_id'],
+                'table_id' => $request->tableId(),
+                'user_id' => $request->user()->id,
                 'estado' => OrderStatus::Pendiente,
                 'observaciones' => $validated['observaciones'] ?? null,
             ]);
@@ -100,6 +127,7 @@ class OrderController extends Controller
                     'dish_id' => $dish->id,
                     'cantidad' => $item['cantidad'],
                     'precio_unitario' => $dish->precio,
+                    'observaciones' => $item['observaciones'] ?? null,
                 ]);
             }
 

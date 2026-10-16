@@ -2,8 +2,8 @@
 
 namespace Database\Seeders;
 
-use App\Models\Table;
 use App\Models\QRCode;
+use App\Models\Table;
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Str;

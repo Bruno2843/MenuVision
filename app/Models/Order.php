@@ -11,7 +11,7 @@ use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 
-#[Fillable(['table_id', 'estado', 'observaciones', 'motivo_devolucion'])]
+#[Fillable(['table_id', 'user_id', 'estado', 'observaciones', 'motivo_devolucion'])]
 class Order extends Model
 {
     /**
@@ -29,6 +29,17 @@ class Order extends Model
     public function table(): BelongsTo
     {
         return $this->belongsTo(Table::class);
+    }
+
+    /**
+     * The staff member who took the order. Nullable, because an order recorded
+     * before this relation existed has nobody to point at.
+     *
+     * @return BelongsTo<User, $this>
+     */
+    public function user(): BelongsTo
+    {
+        return $this->belongsTo(User::class);
     }
 
     /**

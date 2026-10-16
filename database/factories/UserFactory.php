@@ -32,6 +32,7 @@ class UserFactory extends Factory
             'password' => static::$password ??= Hash::make('password'),
             'remember_token' => Str::random(10),
             'role' => Role::Mozo,
+            'activo' => true,
         ];
     }
 
@@ -53,6 +54,16 @@ class UserFactory extends Factory
     {
         return $this->state(fn (array $attributes) => [
             'role' => Role::Cocina,
+        ]);
+    }
+
+    /**
+     * An account that can no longer sign in but whose history is kept.
+     */
+    public function deactivated(): static
+    {
+        return $this->state(fn (array $attributes) => [
+            'activo' => false,
         ]);
     }
 

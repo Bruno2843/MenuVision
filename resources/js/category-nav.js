@@ -1,19 +1,14 @@
 /**
- * How far below the top of the viewport the reader is considered to be looking.
- * A section becomes the active one as soon as its title passes under the
- * category bar, so the bar height is subtracted from the observed area.
+ * Filter the dish cards by category.
  *
- * The remaining bottom margin keeps a short trailing section from winning over
- * a taller one that started before it: the first visible section in document
- * order is the one the reader is actually on.
- */
-const ROOT_MARGIN_BOTTOM = '-55%';
-
-/**
- * Highlight the category the reader is currently on.
+ * The public menu marks its category bar with `data-category-nav`, every
+ * category button with `data-category-link` (carrying its category id in
+ * `data-categoria`), and the "Todas" button with `data-category-all`. Dish
+ * cards are marked with `data-dish-card` and the grid with `data-grid`.
  *
- * The public menu marks its category bar with `data-category-nav` and every
- * chip with `data-category-link`. On any other page this call is a no-op.
+ * The server already sent only the available dishes; this toggle only decides
+ * which of those are visible, so no business logic lives on the client. On any
+ * other page the call is a no-op.
  */
 export const startCategoryNav = () => {
     const nav = document.querySelector('[data-category-nav]');
@@ -22,63 +17,59 @@ export const startCategoryNav = () => {
         return;
     }
 
-    const links = [...nav.querySelectorAll('[data-category-link]')];
-    const targets = links
-        .map((link) => document.getElementById(link.hash.slice(1)))
-        .filter((section) => section !== null);
+    const categoryButtons = [...nav.querySelectorAll('[data-category-link]')];
+    const allButton = nav.querySelector('[data-category-all]');
+    const resetLink = document.querySelector('[data-reset-filtro]');
+    const cards = [...document.querySelectorAll('[data-dish-card]')];
+    const emptyNotice = document.querySelector('[data-filtro-vacio]');
+    const countHint = document.querySelector('[data-platos-count]');
 
-    if (targets.length === 0) {
-        return;
-    }
+    const applyFilter = (categoryId) => {
+        let visible = 0;
 
-    const ACTIVE_CLASSES = ['border-gold-400', 'bg-gold-500/15', 'text-gold-200'];
-    const IDLE_CLASSES = ['border-gray-800', 'text-gray-400', 'hover:border-gold-600/60', 'hover:text-gold-300'];
+        cards.forEach((card) => {
+            const matches = categoryId === null || card.dataset.categoria === String(categoryId);
 
-    const markActive = (id) => {
-        links.forEach((link) => {
-            const isActive = link.hash === `#${id}`;
+            card.classList.toggle('hidden', ! matches);
 
-            ACTIVE_CLASSES.forEach((className) => link.classList.toggle(className, isActive));
-            IDLE_CLASSES.forEach((className) => link.classList.toggle(className, ! isActive));
-
-            if (isActive) {
-                link.setAttribute('aria-current', 'true');
-            } else {
-                link.removeAttribute('aria-current');
-            }
-        });
-    };
-
-    // Keep the highlighted chip inside the horizontal scroller on narrow
-    // screens, where most of the categories are off screen.
-    const revealActive = (id) => {
-        links
-            .find((link) => link.hash === `#${id}`)
-            ?.scrollIntoView({ block: 'nearest', inline: 'center', behavior: 'smooth' });
-    };
-
-    const visible = new Set();
-
-    const observer = new IntersectionObserver((entries) => {
-        entries.forEach((entry) => {
-            if (entry.isIntersecting) {
-                visible.add(entry.target);
-            } else {
-                visible.delete(entry.target);
+            if (matches) {
+                visible += 1;
             }
         });
 
-        const current = targets.find((section) => visible.has(section));
+        categoryButtons.forEach((button) => {
+            button.setAttribute('aria-pressed', String(button.dataset.categoria === String(categoryId)));
+        });
 
-        if (!current) {
+        allButton?.setAttribute('aria-pressed', String(categoryId === null));
+
+        countHint?.replaceChildren(document.createTextNode(
+            `${visible} ${visible === 1 ? 'plato' : 'platos'} disponibles`
+        ));
+
+        emptyNotice?.classList.toggle('hidden', visible > 0);
+    };
+
+    categoryButtons.forEach((button) => {
+        button.addEventListener('click', () => {
+            applyFilter(button.dataset.categoria ?? null);
+        });
+    });
+
+    allButton?.addEventListener('click', () => {
+        applyFilter(null);
+    });
+
+    // "Ver todo" is an anchor to the grid, so it resets the filter first and
+    // then lets the browser scroll to the grid as usual.
+    resetLink?.addEventListener('click', (event) => {
+        applyFilter(null);
+
+        if (event.defaultPrevented) {
             return;
         }
 
-        markActive(current.id);
-        revealActive(current.id);
-    }, {
-        rootMargin: `-${nav.offsetHeight}px 0px ${ROOT_MARGIN_BOTTOM}`,
+        resetLink.scrollIntoView({ behavior: 'smooth', block: 'start' });
+        event.preventDefault();
     });
-
-    targets.forEach((section) => observer.observe(section));
 };

@@ -1,0 +1,122 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 800" width="1200" height="800" role="img">
+    <defs>
+        <linearGradient id="mesa" x1="0.1" y1="0" x2="0.9" y2="1">
+            <stop offset="0%" stop-color="#241C12"/>
+            <stop offset="50%" stop-color="#14110D"/>
+            <stop offset="100%" stop-color="#08090B"/>
+        </linearGradient>
+
+        <radialGradient id="luz" cx="72%" cy="18%" r="70%">
+            <stop offset="0%" stop-color="#F0C64A" stop-opacity="0.26"/>
+            <stop offset="100%" stop-color="#D6A928" stop-opacity="0"/>
+        </radialGradient>
+
+        <linearGradient id="tabla" x1="0" y1="0" x2="0.4" y2="1">
+            <stop offset="0%" stop-color="#4A3421"/>
+            <stop offset="60%" stop-color="#2E2013"/>
+            <stop offset="100%" stop-color="#1A1109"/>
+        </linearGradient>
+
+        <radialGradient id="masa" cx="34%" cy="26%" r="80%">
+            <stop offset="0%" stop-color="#EFC071"/>
+            <stop offset="55%" stop-color="#CE8C3A"/>
+            <stop offset="100%" stop-color="#7E4C1D"/>
+        </radialGradient>
+
+        <radialGradient id="salsa" cx="40%" cy="32%" r="78%">
+            <stop offset="0%" stop-color="#BE4226"/>
+            <stop offset="100%" stop-color="#58170C"/>
+        </radialGradient>
+
+        <radialGradient id="queso" cx="34%" cy="26%" r="82%">
+            <stop offset="0%" stop-color="#FBF0CB"/>
+            <stop offset="55%" stop-color="#EDCE88"/>
+            <stop offset="100%" stop-color="#BF9042"/>
+        </radialGradient>
+
+        <radialGradient id="pepperoni" cx="36%" cy="30%" r="74%">
+            <stop offset="0%" stop-color="#D75A3C"/>
+            <stop offset="60%" stop-color="#A8301C"/>
+            <stop offset="100%" stop-color="#6B1B0E"/>
+        </radialGradient>
+
+        <radialGradient id="vino" cx="34%" cy="24%" r="80%">
+            <stop offset="0%" stop-color="#7A1220"/>
+            <stop offset="100%" stop-color="#2C060C"/>
+        </radialGradient>
+
+        <radialGradient id="vineta" cx="46%" cy="48%" r="72%">
+            <stop offset="50%" stop-color="#08090B" stop-opacity="0"/>
+            <stop offset="100%" stop-color="#08090B" stop-opacity="0.93"/>
+        </radialGradient>
+
+        <filter id="borde" x="-12%" y="-12%" width="124%" height="124%">
+            <feTurbulence type="fractalNoise" baseFrequency="0.03" numOctaves="3" seed="23" result="ruido"/>
+            <feDisplacementMap in="SourceGraphic" in2="ruido" scale="15" xChannelSelector="R" yChannelSelector="G"/>
+        </filter>
+
+        <filter id="derretido" x="-12%" y="-12%" width="124%" height="124%">
+            <feTurbulence type="fractalNoise" baseFrequency="0.018" numOctaves="4" seed="31" result="ruido"/>
+            <feDisplacementMap in="SourceGraphic" in2="ruido" scale="20" xChannelSelector="R" yChannelSelector="G"/>
+        </filter>
+
+        <filter id="sombra" x="-30%" y="-30%" width="160%" height="160%">
+            <feGaussianBlur stdDeviation="24"/>
+        </filter>
+
+        <filter id="desenfoque" x="-40%" y="-40%" width="180%" height="180%">
+            <feGaussianBlur stdDeviation="22"/>
+        </filter>
+
+        <filter id="grano" x="0" y="0" width="100%" height="100%">
+            <feTurbulence type="fractalNoise" baseFrequency="0.9" numOctaves="2" seed="5"/>
+            <feColorMatrix type="saturate" values="0"/>
+        </filter>
+    </defs>
+
+    <rect width="1200" height="800" fill="url(#mesa)"/>
+    <rect width="1200" height="800" fill="url(#luz)"/>
+
+    <g opacity="0.55" filter="url(#desenfoque)">
+        <ellipse cx="978" cy="252" rx="62" ry="150" fill="url(#vino)" opacity="0.85"/>
+        <ellipse cx="978" cy="196" rx="46" ry="30" fill="#F0C64A" opacity="0.30"/>
+        <ellipse cx="1020" cy="392" rx="120" ry="34" fill="#000" opacity="0.6"/>
+    </g>
+
+    <g transform="rotate(-6 470 430)">
+        <rect x="118" y="252" width="700" height="392" rx="34" fill="#000" opacity="0.65" filter="url(#sombra)"/>
+        <rect x="126" y="236" width="700" height="392" rx="32" fill="url(#tabla)"/>
+
+        <ellipse cx="476" cy="452" rx="300" ry="238" fill="#000" opacity="0.62" filter="url(#sombra)"/>
+
+        <g filter="url(#borde)">
+            <circle cx="470" cy="430" r="216" fill="url(#masa)"/>
+        </g>
+
+        <g filter="url(#derretido)">
+            <circle cx="470" cy="430" r="172" fill="url(#salsa)"/>
+            <circle cx="470" cy="430" r="166" fill="url(#queso)" opacity="0.95"/>
+        </g>
+
+        <g fill="url(#pepperoni)">
+            <circle cx="396" cy="366" r="34"/>
+            <circle cx="548" cy="352" r="30"/>
+            <circle cx="582" cy="470" r="33"/>
+            <circle cx="430" cy="500" r="31"/>
+            <circle cx="356" cy="452" r="28"/>
+            <circle cx="496" cy="424" r="26"/>
+        </g>
+
+        <g fill="#F3D9A4" opacity="0.32">
+            <circle cx="386" cy="358" r="11"/>
+            <circle cx="540" cy="345" r="9"/>
+            <circle cx="572" cy="463" r="10"/>
+            <circle cx="422" cy="493" r="9"/>
+        </g>
+
+        <ellipse cx="356" cy="342" rx="96" ry="52" fill="#F7F3EA" opacity="0.12" filter="url(#desenfoque)"/>
+    </g>
+
+    <rect width="1200" height="800" fill="url(#vineta)"/>
+    <rect width="1200" height="800" filter="url(#grano)" opacity="0.05" style="mix-blend-mode:overlay"/>
+</svg>

@@ -15,7 +15,12 @@
                 <h1 class="text-2xl font-bold text-white">
                     Pedido #{{ $order->id }} · Mesa {{ $order->table->numero }}
                 </h1>
-                <p class="text-sm text-gray-400">{{ $order->created_at->format('d/m/Y H:i') }}</p>
+                    <p class="text-sm text-gray-400">
+                        {{ $order->created_at->format('d/m/Y H:i') }}
+                        @if ($order->user)
+                            · Mozo: {{ $order->user->name }}
+                        @endif
+                    </p>
             </div>
 
             <span class="rounded-full px-3 py-1 text-sm font-medium {{ $order->estado->badgeClasses() }}">
@@ -62,7 +67,12 @@
             <tbody class="divide-y divide-gray-800">
                 @foreach ($order->items as $item)
                     <tr>
-                        <td class="px-4 py-3 font-medium text-gray-100">{{ $item->dish->nombre }}</td>
+                        <td class="px-4 py-3 font-medium text-gray-100">
+                            {{ $item->dish->nombre }}
+                            @if ($item->observaciones)
+                                <p class="mt-0.5 text-xs text-gray-500">{{ $item->observaciones }}</p>
+                            @endif
+                        </td>
                         <td class="px-4 py-3 text-center text-gray-300">{{ $item->cantidad }}</td>
                         <td class="px-4 py-3 text-right text-gray-400">
                             ${{ number_format($item->precio_unitario, 2) }}

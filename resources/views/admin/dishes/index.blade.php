@@ -1,4 +1,4 @@
-@extends('layouts.staff')
+@extends('layouts.admin')
 
 @section('title', 'Admin · Platos')
 
@@ -11,8 +11,9 @@
 
         <a
             href="{{ route('admin.dishes.create') }}"
-            class="rounded-lg bg-gold-500 px-4 py-2 text-sm font-semibold text-black transition hover:bg-gold-600"
+            class="inline-flex items-center gap-2 rounded-lg bg-gold-500 px-4 py-2 text-sm font-semibold text-black transition hover:bg-gold-600"
         >
+            @include('partials.icon', ['icon' => 'mas', 'iconClass' => 'h-4 w-4'])
             Nuevo plato
         </a>
     </div>
@@ -57,13 +58,15 @@
         @endif
     </form>
 
-    <div class="overflow-hidden rounded-xl border border-gray-800">
-        <table class="w-full text-left text-sm">
+    <div class="overflow-x-auto rounded-xl border border-gray-800">
+        <table class="w-full min-w-[52rem] text-left text-sm">
             <thead class="bg-gray-900 text-xs uppercase tracking-wide text-gray-500">
                 <tr>
                     <th scope="col" class="px-4 py-2 font-medium">Plato</th>
                     <th scope="col" class="px-4 py-2 font-medium">Categoría</th>
                     <th scope="col" class="px-4 py-2 text-center font-medium">Orden</th>
+                    <th scope="col" class="px-4 py-2 text-center font-medium">Foto</th>
+                    <th scope="col" class="px-4 py-2 text-center font-medium">3D</th>
                     <th scope="col" class="px-4 py-2 text-right font-medium">Precio</th>
                     <th scope="col" class="px-4 py-2 text-center font-medium">Estado</th>
                     <th scope="col" class="px-4 py-2 text-right font-medium">Acciones</th>
@@ -75,11 +78,30 @@
                         <td class="px-4 py-3">
                             <span class="font-medium text-gray-100">{{ $dish->nombre }}</span>
                             @if ($dish->descripcion)
-                                <p class="mt-0.5 text-xs text-gray-500">{{ $dish->descripcion }}</p>
+                                <p class="mt-0.5 max-w-xs truncate text-xs text-gray-500">{{ $dish->descripcion }}</p>
                             @endif
                         </td>
                         <td class="px-4 py-3 text-gray-400">{{ $dish->category->nombre }}</td>
                         <td class="px-4 py-3 text-center text-gray-500">{{ $dish->orden }}</td>
+                        <td class="px-4 py-3 text-center">
+                            @if ($dish->imagenUrl())
+                                <span class="text-xs text-green-300">Sí</span>
+                            @else
+                                <span class="text-xs text-gray-500" title="Usa la imagen de la categoría">No</span>
+                            @endif
+                        </td>
+                        <td class="px-4 py-3 text-center">
+                            @if ($dish->model3D?->existe())
+                                <span class="inline-flex items-center gap-1 text-xs text-green-300">
+                                    @include('partials.icon', ['icon' => 'cubo', 'iconClass' => 'h-3.5 w-3.5'])
+                                    AR
+                                </span>
+                            @elseif ($dish->model3D)
+                                <span class="text-xs text-amber-300" title="El archivo no está en el disco">Roto</span>
+                            @else
+                                <span class="text-xs text-gray-500">No</span>
+                            @endif
+                        </td>
                         <td class="px-4 py-3 text-right font-semibold text-gold-400">
                             ${{ number_format($dish->precio, 2) }}
                         </td>
@@ -96,22 +118,29 @@
                             <div class="flex items-center justify-end gap-3">
                                 <a
                                     href="{{ route('admin.dishes.edit', $dish) }}"
-                                    class="text-gold-400 hover:text-gold-300"
+                                    class="inline-flex items-center gap-1.5 text-gold-400 hover:text-gold-300"
                                 >
+                                    @include('partials.icon', ['icon' => 'editar', 'iconClass' => 'h-4 w-4'])
                                     Editar
                                 </a>
 
                                 <form method="POST" action="{{ route('admin.dishes.destroy', $dish) }}">
                                     @csrf
                                     @method('DELETE')
-                                    <button type="submit" class="text-red-400 hover:text-red-300">Eliminar</button>
+                                    <button
+                                        type="submit"
+                                        class="inline-flex items-center gap-1.5 text-red-400 hover:text-red-300"
+                                    >
+                                        @include('partials.icon', ['icon' => 'basura', 'iconClass' => 'h-4 w-4'])
+                                        Eliminar
+                                    </button>
                                 </form>
                             </div>
                         </td>
                     </tr>
                 @empty
                     <tr>
-                        <td colspan="6" class="px-4 py-8 text-center text-gray-500">
+                        <td colspan="8" class="px-4 py-8 text-center text-gray-500">
                             No se encontraron platos.
                         </td>
                     </tr>

@@ -38,10 +38,21 @@ return [
             'report' => false,
         ],
 
+        /*
+         * The `url` is deliberately root relative instead of being built from
+         * APP_URL. The same installation is reached through several hosts at
+         * once: the Herd domain on the developer's machine, 127.0.0.1 while
+         * `artisan serve` is up, and the LAN address of the machine on every
+         * phone that scans a table QR code. Baking one host into the URL means
+         * every photo and every .glb is requested from a host the device may
+         * not even be able to reach, and a photograph the browser cannot fetch
+         * is indistinguishable from a dish that has none. A relative URL is
+         * resolved against whatever host the page was actually served from.
+         */
         'public' => [
             'driver' => 'local',
             'root' => storage_path('app/public'),
-            'url' => rtrim(env('APP_URL', 'http://localhost'), '/').'/storage',
+            'url' => '/storage',
             'visibility' => 'public',
             'throw' => false,
             'report' => false,

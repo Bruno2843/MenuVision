@@ -1,21 +1,24 @@
-@extends('layouts.staff')
+@extends('layouts.admin')
 
 @section('title', 'Admin · Nuevo plato')
 
 @section('content')
-    <div class="mb-6">
-        <a href="{{ route('admin.dishes.index') }}" class="text-sm text-gray-400 hover:text-gold-400">
-            ← Volver a los platos
-        </a>
-        <h1 class="mt-2 text-2xl font-bold text-white">Nuevo plato</h1>
-    </div>
+    @include('admin.partials.page-header', [
+        'titulo' => 'Nuevo plato',
+        'volver' => route('admin.dishes.index'),
+        'volverTexto' => 'Volver a los platos',
+    ])
 
     @include('admin.partials.flash')
 
-    <form method="POST" action="{{ route('admin.dishes.store') }}">
+    <form
+        method="POST"
+        action="{{ route('admin.dishes.store') }}"
+        enctype="multipart/form-data"
+    >
         @csrf
 
-        <div class="max-w-2xl rounded-xl border border-gray-800 bg-gray-900 p-6">
+        <div class="max-w-3xl rounded-xl border border-gray-800 bg-gray-900 p-6">
             @include('admin.dishes.form')
 
             <div class="mt-6 flex justify-end gap-3">

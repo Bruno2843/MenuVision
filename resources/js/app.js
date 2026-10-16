@@ -1,15 +1,50 @@
 import GLBViewer from './3d/viewer';
+import { startAdminSidebar } from './admin-sidebar';
 import { startCategoryNav } from './category-nav';
+import { startImageFallbacks } from './imagen-respaldo';
 import QRScanner from './qr-scanner';
 import { startLiveRefresh } from './live-refresh';
+import { startWaiterQrScanner } from './waiter/qr-scanner';
 
 // The kitchen and waiter dashboards mark their live area with `data-poll-url`.
 // On every other page this call is a no-op.
 startLiveRefresh();
 
+// The admin panel marks its navigation drawer with `data-sidebar`. On the other
+// panels, and on the public menu, this call is a no-op.
+startAdminSidebar();
+
 // The public menu marks its category bar with `data-category-nav` and
 // highlights the category being read. Elsewhere this call is a no-op.
 startCategoryNav();
+
+// Every dish image declares, in `data-imagen-respaldo`, the picture the server
+// would have picked had the uploaded photograph not been there. This call swaps
+// that picture in when the photograph cannot be loaded, so a dish is never left
+// with an empty dark frame where its picture should be.
+startImageFallbacks();
+
+// The waiter dashboard marks its scan button with `data-waiter-scan` and the
+// overlay it opens lives next to it. On the other panels, and on the public
+// menu, this call is a no-op.
+startWaiterQrScanner();
+
+// The dish detail shows a 3D model with `<model-viewer>` and a "Ver en mi
+// espacio" button. The runtime is pulled in only when that page is the one
+// being rendered, because it is by far the heaviest dependency of the project
+// and no other screen needs it. Elsewhere this call is a no-op.
+if (document.querySelector('[data-ar-visor]')) {
+    import('./3d/ar-viewer')
+        .then(({ startAugmentedReality }) => startAugmentedReality())
+        .catch(() => {
+            const estado = document.querySelector('[data-ar-estado]');
+
+            if (estado) {
+                estado.textContent =
+                    'Hubo un problema al cargar el modelo. Intentá nuevamente.';
+            }
+        });
+}
 
 /**
  * Initialise every GLB viewer element found in the page.

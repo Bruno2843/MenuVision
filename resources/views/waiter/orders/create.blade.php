@@ -5,7 +5,14 @@
 @section('content')
     <div class="mb-6">
         <h1 class="text-2xl font-bold text-white">Tomar pedido</h1>
-        <p class="text-sm text-gray-400">Elegí la mesa y las cantidades de cada plato.</p>
+        <p class="text-sm text-gray-400">
+            @if ($codigoQr)
+                Mesa {{ $table->numero }} · Mozo: {{ auth()->user()->name }}. Elegí las cantidades y las
+                observaciones de cada plato.
+            @else
+                Elegí la mesa y las cantidades de cada plato.
+            @endif
+        </p>
     </div>
 
     @if ($errors->any())
@@ -22,22 +29,45 @@
         @csrf
 
         <div class="mb-6 grid gap-4 sm:grid-cols-2">
-            <div>
-                <label for="table_id" class="mb-1 block text-sm font-medium text-gray-300">Mesa</label>
-                <select
-                    id="table_id"
-                    name="table_id"
-                    required
-                    class="w-full rounded-lg border border-gray-700 bg-gray-800 px-3 py-2 text-sm text-gray-100 focus:border-gold-500 focus:outline-none focus:ring-1 focus:ring-gold-500"
-                >
-                    <option value="">Elegí una mesa</option>
-                    @foreach ($tables as $table)
-                        <option value="{{ $table->id }}" @selected(old('table_id') == $table->id)>
-                            Mesa {{ $table->numero }} — {{ $table->estado->label() }}
-                        </option>
-                    @endforeach
-                </select>
-            </div>
+            @if ($codigoQr)
+                {{--
+                    Reached through the scanner: the table was resolved from the
+                    stored QR code on the server, so it is shown as a fact and not
+                    offered as a choice. The code travels with the form so the
+                    table is resolved again when the order is saved.
+                --}}
+                <input type="hidden" name="codigo_qr" value="{{ $codigoQr }}">
+
+                <div>
+                    <span class="mb-1 block text-sm font-medium text-gray-300">Mesa</span>
+                    <p
+                        data-waiter-scan-table
+                        class="rounded-lg border border-gold-600/50 bg-gray-800 px-3 py-2 text-sm font-semibold text-gold-400"
+                    >
+                        Mesa {{ $table->numero }} — {{ $table->estado->label() }}
+                    </p>
+                    <p class="mt-1 text-xs text-gray-500">
+                        Detectada con el QR. Mozo: {{ auth()->user()->name }}.
+                    </p>
+                </div>
+            @else
+                <div>
+                    <label for="table_id" class="mb-1 block text-sm font-medium text-gray-300">Mesa</label>
+                    <select
+                        id="table_id"
+                        name="table_id"
+                        required
+                        class="w-full rounded-lg border border-gray-700 bg-gray-800 px-3 py-2 text-sm text-gray-100 focus:border-gold-500 focus:outline-none focus:ring-1 focus:ring-gold-500"
+                    >
+                        <option value="">Elegí una mesa</option>
+                        @foreach ($tables as $table)
+                            <option value="{{ $table->id }}" @selected(old('table_id') == $table->id)>
+                                Mesa {{ $table->numero }} — {{ $table->estado->label() }}
+                            </option>
+                        @endforeach
+                    </select>
+                </div>
+            @endif
 
             <div>
                 <label for="observaciones" class="mb-1 block text-sm font-medium text-gray-300">
@@ -60,13 +90,14 @@
                     {{ $category->nombre }}
                 </h2>
 
-                <div class="overflow-hidden rounded-xl border border-gray-800">
-                    <table class="w-full text-left text-sm">
+                <div class="overflow-x-auto rounded-xl border border-gray-800">
+                    <table class="w-full min-w-[36rem] text-left text-sm">
                         <thead class="bg-gray-900 text-xs uppercase tracking-wide text-gray-500">
                             <tr>
                                 <th scope="col" class="px-4 py-2 font-medium">Plato</th>
                                 <th scope="col" class="px-4 py-2 text-right font-medium">Precio</th>
                                 <th scope="col" class="px-4 py-2 text-right font-medium">Cantidad</th>
+                                <th scope="col" class="px-4 py-2 font-medium">Observaciones</th>
                             </tr>
                         </thead>
                         <tbody class="divide-y divide-gray-800">
@@ -91,6 +122,19 @@
                                             value="{{ old("items.{$dish->id}.cantidad", 0) }}"
                                             aria-label="Cantidad de {{ $dish->nombre }}"
                                             class="w-20 rounded-lg border border-gray-700 bg-gray-800 px-2 py-1 text-right text-sm text-gray-100 focus:border-gold-500 focus:outline-none focus:ring-1 focus:ring-gold-500"
+                                        >
+                                    </td>
+                                    <td class="px-4 py-3">
+                                        <label class="sr-only" for="obs-{{ $dish->id }}">
+                                            Observaciones de {{ $dish->nombre }}
+                                        </label>
+                                        <input
+                                            id="obs-{{ $dish->id }}"
+                                            type="text"
+                                            name="items[{{ $dish->id }}][observaciones]"
+                                            value="{{ old("items.{$dish->id}.observaciones") }}"
+                                            placeholder="Sin sal, sin cebolla…"
+                                            class="w-full rounded-lg border border-gray-700 bg-gray-800 px-2 py-1 text-sm text-gray-100 placeholder-gray-500 focus:border-gold-500 focus:outline-none focus:ring-1 focus:ring-gold-500"
                                         >
                                     </td>
                                 </tr>

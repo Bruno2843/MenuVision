@@ -1,0 +1,107 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 800" width="1200" height="800" role="img">
+    <defs>
+        <linearGradient id="mesa" x1="0" y1="0" x2="0.2" y2="1">
+            <stop offset="0%" stop-color="#2A2015"/>
+            <stop offset="52%" stop-color="#14110D"/>
+            <stop offset="100%" stop-color="#08090B"/>
+        </linearGradient>
+
+        <radialGradient id="luz" cx="34%" cy="10%" r="68%">
+            <stop offset="0%" stop-color="#F0C64A" stop-opacity="0.30"/>
+            <stop offset="100%" stop-color="#D6A928" stop-opacity="0"/>
+        </radialGradient>
+
+        <radialGradient id="platoP" cx="34%" cy="26%" r="80%">
+            <stop offset="0%" stop-color="#FBF9F4"/>
+            <stop offset="58%" stop-color="#E1DBCE"/>
+            <stop offset="100%" stop-color="#948C7F"/>
+        </radialGradient>
+
+        <linearGradient id="carneP" x1="0.15" y1="0" x2="0.85" y2="1">
+            <stop offset="0%" stop-color="#8B4A2A"/>
+            <stop offset="48%" stop-color="#5C2B14"/>
+            <stop offset="100%" stop-color="#331608"/>
+        </linearGradient>
+
+        <linearGradient id="papas" x1="0" y1="0" x2="1" y2="0.5">
+            <stop offset="0%" stop-color="#F4CE72"/>
+            <stop offset="60%" stop-color="#DCA637"/>
+            <stop offset="100%" stop-color="#9E6C0F"/>
+        </linearGradient>
+
+        <linearGradient id="verdura" x1="0" y1="0" x2="1" y2="0.6">
+            <stop offset="0%" stop-color="#7DB04A"/>
+            <stop offset="100%" stop-color="#2F5A1B"/>
+        </linearGradient>
+
+        <radialGradient id="vineta" cx="50%" cy="46%" r="73%">
+            <stop offset="50%" stop-color="#08090B" stop-opacity="0"/>
+            <stop offset="100%" stop-color="#08090B" stop-opacity="0.94"/>
+        </radialGradient>
+
+        <filter id="sombra" x="-30%" y="-30%" width="160%" height="160%">
+            <feGaussianBlur stdDeviation="22"/>
+        </filter>
+
+        <filter id="desenfoque" x="-40%" y="-40%" width="180%" height="180%">
+            <feGaussianBlur stdDeviation="21"/>
+        </filter>
+
+        <filter id="grano" x="0" y="0" width="100%" height="100%">
+            <feTurbulence type="fractalNoise" baseFrequency="0.9" numOctaves="2" seed="101"/>
+            <feColorMatrix type="saturate" values="0"/>
+        </filter>
+    </defs>
+
+    <rect width="1200" height="800" fill="url(#mesa)"/>
+    <rect width="1200" height="800" fill="url(#luz)"/>
+
+    <g filter="url(#desenfoque)" opacity="0.45">
+        <circle cx="1084" cy="200" r="30" fill="#F0C64A" opacity="0.5"/>
+        <circle cx="122" cy="612" r="22" fill="#D6A928" opacity="0.35"/>
+    </g>
+
+    <ellipse cx="600" cy="500" rx="310" ry="110" fill="#000" opacity="0.74" filter="url(#sombra)"/>
+    <ellipse cx="600" cy="448" rx="298" ry="154" fill="url(#platoP)"/>
+    <ellipse cx="600" cy="448" rx="298" ry="154" fill="none" stroke="#08090B" stroke-opacity="0.22" stroke-width="3"/>
+
+    <g>
+        <g fill="url(#papas)">
+            <ellipse cx="800" cy="360" rx="52" ry="28" transform="rotate(-16 800 360)"/>
+            <ellipse cx="852" cy="398" rx="50" ry="26" transform="rotate(12 852 398)"/>
+            <ellipse cx="792" cy="424" rx="48" ry="25" transform="rotate(6 792 424)"/>
+            <ellipse cx="858" cy="452" rx="46" ry="24" transform="rotate(-8 858 452)"/>
+        </g>
+        <g fill="#FFF0C2" opacity="0.28">
+            <ellipse cx="790" cy="352" rx="30" ry="12" transform="rotate(-16 790 352)"/>
+            <ellipse cx="842" cy="390" rx="28" ry="11" transform="rotate(12 842 390)"/>
+        </g>
+
+        <path d="M430 508c-10-96 66-158 176-158s190 62 182 158c-40 40-318 40-358 0Z" fill="url(#carneP)"/>
+        <path d="M430 508c-10-96 66-158 176-158 34 0 66 9 94 25-72 32-118 78-124 133-52 8-104 8-146 0Z" fill="#A65C33" opacity="0.45"/>
+
+        <g stroke="#2A1108" stroke-opacity="0.55" stroke-width="6" stroke-linecap="round">
+            <path d="M470 386 618 494"/>
+            <path d="M524 356 672 464"/>
+            <path d="M578 352 726 460"/>
+            <path d="M632 360 780 468"/>
+            <path d="M686 380 806 456"/>
+        </g>
+
+        <g stroke="#E4A05C" stroke-opacity="0.28" stroke-width="3" stroke-linecap="round">
+            <path d="M478 384 626 492"/>
+            <path d="M586 350 734 458"/>
+            <path d="M694 382 812 458"/>
+        </g>
+
+        <ellipse cx="700" cy="386" rx="46" ry="18" fill="#F3D9A8" opacity="0.22"/>
+
+        <g stroke="url(#verdura)" stroke-width="7" fill="none" stroke-linecap="round">
+            <path d="M436 560c34-26 66-22 88 2"/>
+            <path d="M454 588c30-22 60-18 80 4"/>
+        </g>
+    </g>
+
+    <rect width="1200" height="800" fill="url(#vineta)"/>
+    <rect width="1200" height="800" filter="url(#grano)" opacity="0.05" style="mix-blend-mode:overlay"/>
+</svg>

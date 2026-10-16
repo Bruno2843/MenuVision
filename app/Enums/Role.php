@@ -43,23 +43,30 @@ enum Role: string
     /**
      * The staff panel navigation links available to this role.
      *
-     * @return array<int, array{0: string, 1: string}>
+     * Each entry is [route name, label, icon name]; the icon is rendered by
+     * `partials.icon` so this enum carries no markup.
+     *
+     * @return array<int, array{0: string, 1: string, 2: string}>
      */
     public function navigation(): array
     {
         return match ($this) {
             self::Administrador => [
-                ['admin.dashboard', 'Panel'],
-                ['admin.categories.index', 'Categorías'],
-                ['admin.dishes.index', 'Platos'],
+                ['admin.dashboard', 'Panel', 'panel'],
+                ['admin.categories.index', 'Categorías', 'categorias'],
+                ['admin.dishes.index', 'Platos', 'platos'],
+                ['admin.ingredients.index', 'Ingredientes', 'ingredientes'],
+                ['admin.tables.index', 'Mesas y QR', 'mesas'],
+                ['admin.orders.index', 'Pedidos', 'pedidos'],
+                ['admin.users.index', 'Usuarios', 'usuarios'],
             ],
             self::Mozo => [
-                ['waiter.dashboard', 'Pedidos'],
-                ['waiter.menu', 'Carta'],
-                ['waiter.orders.create', 'Tomar pedido'],
+                ['waiter.dashboard', 'Pedidos', 'pedidos'],
+                ['waiter.menu', 'Carta', 'platos'],
+                ['waiter.orders.create', 'Tomar pedido', 'mas'],
             ],
             self::Cocina => [
-                ['kitchen.dashboard', 'Cocina'],
+                ['kitchen.dashboard', 'Cocina', 'platos'],
             ],
         };
     }

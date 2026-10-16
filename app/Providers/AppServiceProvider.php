@@ -32,7 +32,7 @@ class AppServiceProvider extends ServiceProvider
             ));
         });
 
-        View::composer('layouts.staff', function (ViewContract $view): void {
+        View::composer(['layouts.staff', 'layouts.admin'], function (ViewContract $view): void {
             $view->with('navigation', Auth::user()?->role->navigation() ?? []);
         });
     }

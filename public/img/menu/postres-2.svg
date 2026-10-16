@@ -1,0 +1,84 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 800" width="1200" height="800" role="img">
+    <defs>
+        <linearGradient id="mesa" x1="0" y1="0" x2="0.25" y2="1">
+            <stop offset="0%" stop-color="#271E14"/>
+            <stop offset="52%" stop-color="#13100C"/>
+            <stop offset="100%" stop-color="#08090B"/>
+        </linearGradient>
+
+        <radialGradient id="luz" cx="64%" cy="12%" r="70%">
+            <stop offset="0%" stop-color="#F0C64A" stop-opacity="0.30"/>
+            <stop offset="100%" stop-color="#D6A928" stop-opacity="0"/>
+        </radialGradient>
+
+        <radialGradient id="plato" cx="34%" cy="26%" r="80%">
+            <stop offset="0%" stop-color="#FBF9F3"/>
+            <stop offset="58%" stop-color="#E0DACE"/>
+            <stop offset="100%" stop-color="#948C7F"/>
+        </radialGradient>
+
+        <radialGradient id="caramelo" cx="40%" cy="34%" r="78%">
+            <stop offset="0%" stop-color="#E7A83C"/>
+            <stop offset="55%" stop-color="#BE7514"/>
+            <stop offset="100%" stop-color="#7A4406"/>
+        </radialGradient>
+
+        <linearGradient id="flan" x1="0.2" y1="0" x2="0.8" y2="1">
+            <stop offset="0%" stop-color="#FDECBB"/>
+            <stop offset="52%" stop-color="#EFCF84"/>
+            <stop offset="100%" stop-color="#B98D33"/>
+        </linearGradient>
+
+        <radialGradient id="vineta" cx="50%" cy="46%" r="73%">
+            <stop offset="50%" stop-color="#08090B" stop-opacity="0"/>
+            <stop offset="100%" stop-color="#08090B" stop-opacity="0.93"/>
+        </radialGradient>
+
+        <filter id="sombra" x="-30%" y="-30%" width="160%" height="160%">
+            <feGaussianBlur stdDeviation="22"/>
+        </filter>
+
+        <filter id="suave" x="-30%" y="-30%" width="160%" height="160%">
+            <feGaussianBlur stdDeviation="10"/>
+        </filter>
+
+        <filter id="desenfoque" x="-40%" y="-40%" width="180%" height="180%">
+            <feGaussianBlur stdDeviation="20"/>
+        </filter>
+
+        <filter id="grano" x="0" y="0" width="100%" height="100%">
+            <feTurbulence type="fractalNoise" baseFrequency="0.9" numOctaves="2" seed="67"/>
+            <feColorMatrix type="saturate" values="0"/>
+        </filter>
+    </defs>
+
+    <rect width="1200" height="800" fill="url(#mesa)"/>
+    <rect width="1200" height="800" fill="url(#luz)"/>
+
+    <g filter="url(#desenfoque)" opacity="0.45">
+        <circle cx="176" cy="200" r="28" fill="#F0C64A" opacity="0.5"/>
+        <circle cx="1070" cy="600" r="22" fill="#D6A928" opacity="0.35"/>
+    </g>
+
+    <ellipse cx="600" cy="498" rx="304" ry="108" fill="#000" opacity="0.74" filter="url(#sombra)"/>
+    <ellipse cx="600" cy="440" rx="296" ry="152" fill="url(#plato)"/>
+    <ellipse cx="600" cy="440" rx="296" ry="152" fill="none" stroke="#08090B" stroke-opacity="0.22" stroke-width="3"/>
+
+    <g>
+        <path d="M392 452c-14 42 44 74 208 74s222-32 208-74Z" fill="url(#caramelo)"/>
+        <ellipse cx="600" cy="452" rx="208" ry="46" fill="url(#caramelo)"/>
+
+        <path d="M412 448c0-84 84-148 188-148s188 64 188 148c-52 34-324 34-376 0Z" fill="url(#flan)"/>
+        <path d="M412 448c0-84 84-148 188-148 30 0 58 5 84 15-58 34-92 82-96 133-58 6-118 6-176 0Z" fill="#FFF6D8" opacity="0.42"/>
+
+        <path d="M424 428c10-70 88-120 176-120 60 0 112 22 142 56-34-22-80-34-130-32-84 3-150 42-188 96Z" fill="url(#caramelo)" opacity="0.55"/>
+
+        <ellipse cx="520" cy="336" rx="66" ry="30" fill="#FFFBEA" opacity="0.30" filter="url(#suave)"/>
+    </g>
+
+    <ellipse cx="378" cy="470" rx="52" ry="16" fill="#C58A22" opacity="0.35" filter="url(#suave)"/>
+    <ellipse cx="824" cy="478" rx="46" ry="14" fill="#C58A22" opacity="0.3" filter="url(#suave)"/>
+
+    <rect width="1200" height="800" fill="url(#vineta)"/>
+    <rect width="1200" height="800" filter="url(#grano)" opacity="0.05" style="mix-blend-mode:overlay"/>
+</svg>

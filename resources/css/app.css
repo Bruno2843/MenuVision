@@ -4,8 +4,35 @@
 @source '../../storage/framework/views/*.php';
 
 @theme {
+    /*
+     * The staff panels (admin, waiter, kitchen) keep Instrument Sans, so their
+     * typography is left exactly as it was. The public menu uses Poppins as its
+     * single, high-impact face.
+     */
     --font-sans: 'Instrument Sans', ui-sans-serif, system-ui, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji',
         'Segoe UI Symbol', 'Noto Color Emoji';
+
+    --font-marca: 'Poppins', ui-sans-serif, system-ui, -apple-system, 'Segoe UI', sans-serif;
+
+    /*
+     * Public menu palette: near-black surfaces under a saturated yellow. The
+     * yellow is the identity of the page, not an accent, so it is used on
+     * borders, names, prices and controls rather than on small details.
+     *
+     * It is deliberately a different scale from the gold below: that one is the
+     * muted gold the staff panels are built on, so restyling the public menu
+     * here leaves those panels untouched.
+     */
+    --color-noche-950: #050505;
+    --color-noche-900: #090a0c;
+
+    --color-amarillo-300: #ffe98a;
+    --color-amarillo-400: #ffd84d;
+    --color-amarillo-500: #ffc400;
+    --color-amarillo-600: #f5b900;
+
+    --color-humo-100: #e3e3e3;
+    --color-humo-300: #a6a6a6;
 
     --color-gold-50: #fbf8ee;
     --color-gold-100: #f6efd8;
@@ -17,4 +44,15 @@
     --color-gold-700: #8e6d16;
     --color-gold-800: #6b5212;
     --color-gold-900: #4c3a0d;
+}
+
+@media (prefers-reduced-motion: reduce) {
+    *,
+    *::before,
+    *::after {
+        animation-duration: 0.01ms !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: 0.01ms !important;
+        scroll-behavior: auto !important;
+    }
 }

@@ -1,0 +1,107 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 800" width="1200" height="800" role="img">
+    <defs>
+        <linearGradient id="mesa" x1="0" y1="0" x2="0.25" y2="1">
+            <stop offset="0%" stop-color="#281F16"/>
+            <stop offset="52%" stop-color="#13110D"/>
+            <stop offset="100%" stop-color="#08090B"/>
+        </linearGradient>
+
+        <radialGradient id="luz" cx="64%" cy="12%" r="68%">
+            <stop offset="0%" stop-color="#F0C64A" stop-opacity="0.30"/>
+            <stop offset="100%" stop-color="#D6A928" stop-opacity="0"/>
+        </radialGradient>
+
+        <radialGradient id="platoQ" cx="34%" cy="26%" r="80%">
+            <stop offset="0%" stop-color="#FBF9F4"/>
+            <stop offset="58%" stop-color="#DFD9CC"/>
+            <stop offset="100%" stop-color="#8F8779"/>
+        </radialGradient>
+
+        <linearGradient id="salmon" x1="0.15" y1="0" x2="0.85" y2="1">
+            <stop offset="0%" stop-color="#F2A077"/>
+            <stop offset="50%" stop-color="#E0744A"/>
+            <stop offset="100%" stop-color="#9E3A1D"/>
+        </linearGradient>
+
+        <linearGradient id="purpurea" x1="0" y1="0" x2="1" y2="0.6">
+            <stop offset="0%" stop-color="#8C5AA0"/>
+            <stop offset="100%" stop-color="#3F2154"/>
+        </linearGradient>
+
+        <linearGradient id="brócoli" x1="0" y1="0" x2="1" y2="0.6">
+            <stop offset="0%" stop-color="#6FA23C"/>
+            <stop offset="100%" stop-color="#294E17"/>
+        </linearGradient>
+
+        <radialGradient id="vineta" cx="50%" cy="46%" r="73%">
+            <stop offset="50%" stop-color="#08090B" stop-opacity="0"/>
+            <stop offset="100%" stop-color="#08090B" stop-opacity="0.94"/>
+        </radialGradient>
+
+        <filter id="sombra" x="-30%" y="-30%" width="160%" height="160%">
+            <feGaussianBlur stdDeviation="22"/>
+        </filter>
+
+        <filter id="desenfoque" x="-40%" y="-40%" width="180%" height="180%">
+            <feGaussianBlur stdDeviation="21"/>
+        </filter>
+
+        <filter id="grano" x="0" y="0" width="100%" height="100%">
+            <feTurbulence type="fractalNoise" baseFrequency="0.9" numOctaves="2" seed="103"/>
+            <feColorMatrix type="saturate" values="0"/>
+        </filter>
+    </defs>
+
+    <rect width="1200" height="800" fill="url(#mesa)"/>
+    <rect width="1200" height="800" fill="url(#luz)"/>
+
+    <g filter="url(#desenfoque)" opacity="0.45">
+        <circle cx="150" cy="196" r="28" fill="#F0C64A" opacity="0.5"/>
+        <circle cx="1070" cy="610" r="24" fill="#D6A928" opacity="0.35"/>
+    </g>
+
+    <ellipse cx="600" cy="502" rx="310" ry="110" fill="#000" opacity="0.74" filter="url(#sombra)"/>
+    <ellipse cx="600" cy="448" rx="300" ry="154" fill="url(#platoQ)"/>
+    <ellipse cx="600" cy="448" rx="300" ry="154" fill="none" stroke="#08090B" stroke-opacity="0.22" stroke-width="3"/>
+    <ellipse cx="600" cy="440" rx="232" ry="112" fill="#CBC3B4" opacity="0.45"/>
+
+    <g>
+        <ellipse cx="600" cy="448" rx="206" ry="102" fill="#EDE7D9" opacity="0.35"/>
+
+        <g fill="url(#purpurea)">
+            <ellipse cx="420" cy="392" rx="76" ry="26" transform="rotate(-12 420 392)"/>
+            <ellipse cx="404" cy="432" rx="70" ry="24" transform="rotate(8 404 432)"/>
+        </g>
+        <g fill="#C39AD4" opacity="0.4">
+            <ellipse cx="414" cy="384" rx="42" ry="11" transform="rotate(-12 414 384)"/>
+            <ellipse cx="400" cy="424" rx="38" ry="10" transform="rotate(8 400 424)"/>
+        </g>
+
+        <g fill="url(#brócoli)">
+            <circle cx="792" cy="396" r="46"/>
+            <circle cx="840" cy="428" r="40"/>
+            <circle cx="778" cy="452" r="38"/>
+        </g>
+        <g fill="#9CC96B" opacity="0.4">
+            <circle cx="780" cy="384" r="18"/>
+            <circle cx="830" cy="418" r="15"/>
+        </g>
+
+        <g transform="rotate(-7 600 430)">
+            <path d="M406 400c0-58 82-104 194-104s194 46 194 104c0 44-82 76-194 76s-194-32-194-76Z" fill="url(#salmon)"/>
+            <g stroke="#FBE2CF" stroke-opacity="0.5" stroke-width="6" fill="none" stroke-linecap="round">
+                <path d="M446 372c60 26 128 40 196 40"/>
+                <path d="M440 404c62 24 132 36 202 34"/>
+                <path d="M446 436c60 18 128 26 194 20"/>
+            </g>
+            <path d="M406 400c0-58 82-104 194-104 32 0 62 7 88 18-64 30-104 74-110 124-56 10-114 10-172-4Z" fill="#FFC6A8" opacity="0.32"/>
+        </g>
+
+        <ellipse cx="524" cy="356" rx="56" ry="20" fill="#FFF3E6" opacity="0.26"/>
+    </g>
+
+    <ellipse cx="470" cy="326" rx="88" ry="38" fill="#F7F3EA" opacity="0.12" filter="url(#desenfoque)"/>
+
+    <rect width="1200" height="800" fill="url(#vineta)"/>
+    <rect width="1200" height="800" filter="url(#grano)" opacity="0.05" style="mix-blend-mode:overlay"/>
+</svg>

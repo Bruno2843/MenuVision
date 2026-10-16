@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Public;
 
 use App\Http\Controllers\Controller;
 use App\Models\QRCode;
+use App\Support\MenuUrl;
 use Endroid\QrCode\QrCode as QrCodeGenerator;
 use Endroid\QrCode\Writer\PngWriter;
 use Symfony\Component\HttpFoundation\Response;
@@ -12,12 +13,16 @@ class QrImageController extends Controller
 {
     /**
      * Render the QR image that opens the public menu for a table.
+     *
+     * The PNG is drawn from the URL the QR code resolves right now, which is why
+     * pointing QR_BASE_URL at a new address is enough to move every sticker: the
+     * code is untouched, so the tokens already printed keep their table.
      */
     public function menu(string $code): Response
     {
         $qrCode = QRCode::where('code', $code)->firstOrFail();
 
-        return $this->png(route('menu.show', $qrCode->code));
+        return $this->png(MenuUrl::menu($qrCode->code));
     }
 
     /**
@@ -25,7 +30,7 @@ class QrImageController extends Controller
      */
     public function personal(): Response
     {
-        return $this->png(route('login'));
+        return $this->png(MenuUrl::login());
     }
 
     /**

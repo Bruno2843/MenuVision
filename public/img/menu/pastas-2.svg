@@ -1,0 +1,94 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 800" width="1200" height="800" role="img">
+    <defs>
+        <linearGradient id="mesa" x1="0" y1="0" x2="0.25" y2="1">
+            <stop offset="0%" stop-color="#2B2013"/>
+            <stop offset="50%" stop-color="#15110C"/>
+            <stop offset="100%" stop-color="#08090B"/>
+        </linearGradient>
+
+        <radialGradient id="luz" cx="24%" cy="10%" r="68%">
+            <stop offset="0%" stop-color="#F0C64A" stop-opacity="0.30"/>
+            <stop offset="100%" stop-color="#D6A928" stop-opacity="0"/>
+        </radialGradient>
+
+        <radialGradient id="plato" cx="34%" cy="24%" r="80%">
+            <stop offset="0%" stop-color="#FAF6EE"/>
+            <stop offset="56%" stop-color="#DFD8CA"/>
+            <stop offset="100%" stop-color="#948C7F"/>
+        </radialGradient>
+
+        <linearGradient id="salsa" x1="0.15" y1="0" x2="0.85" y2="1">
+            <stop offset="0%" stop-color="#C24A28"/>
+            <stop offset="55%" stop-color="#9A2E17"/>
+            <stop offset="100%" stop-color="#5C170B"/>
+        </linearGradient>
+
+        <linearGradient id="fideoR" x1="0" y1="0" x2="1" y2="0.4">
+            <stop offset="0%" stop-color="#F3D184"/>
+            <stop offset="55%" stop-color="#DFAE45"/>
+            <stop offset="100%" stop-color="#A8720F"/>
+        </linearGradient>
+
+        <radialGradient id="vineta" cx="50%" cy="46%" r="73%">
+            <stop offset="50%" stop-color="#08090B" stop-opacity="0"/>
+            <stop offset="100%" stop-color="#08090B" stop-opacity="0.93"/>
+        </radialGradient>
+
+        <filter id="sombra" x="-30%" y="-30%" width="160%" height="160%">
+            <feGaussianBlur stdDeviation="24"/>
+        </filter>
+
+        <filter id="desenfoque" x="-40%" y="-40%" width="180%" height="180%">
+            <feGaussianBlur stdDeviation="20"/>
+        </filter>
+
+        <filter id="grano" x="0" y="0" width="100%" height="100%">
+            <feTurbulence type="fractalNoise" baseFrequency="0.9" numOctaves="2" seed="53"/>
+            <feColorMatrix type="saturate" values="0"/>
+        </filter>
+    </defs>
+
+    <rect width="1200" height="800" fill="url(#mesa)"/>
+    <rect width="1200" height="800" fill="url(#luz)"/>
+
+    <g filter="url(#desenfoque)" opacity="0.45">
+        <circle cx="1064" cy="204" r="28" fill="#F0C64A" opacity="0.5"/>
+        <circle cx="128" cy="618" r="22" fill="#D6A928" opacity="0.35"/>
+    </g>
+
+    <g transform="rotate(-4 600 440)">
+        <ellipse cx="600" cy="512" rx="308" ry="112" fill="#000" opacity="0.74" filter="url(#sombra)"/>
+
+        <ellipse cx="600" cy="440" rx="298" ry="172" fill="url(#plato)"/>
+        <ellipse cx="600" cy="440" rx="298" ry="172" fill="none" stroke="#08090B" stroke-opacity="0.25" stroke-width="3"/>
+        <ellipse cx="600" cy="430" rx="232" ry="128" fill="#CBC3B3" opacity="0.45"/>
+
+        <ellipse cx="600" cy="436" rx="208" ry="114" fill="url(#salsa)"/>
+
+        <g fill="none" stroke="url(#fideoR)" stroke-width="15" stroke-linecap="round">
+            <path d="M420 424c56-46 158-50 216-8"/>
+            <path d="M446 468c62-42 160-44 220 2"/>
+            <path d="M458 388c58-38 148-38 200 4"/>
+            <path d="M486 500c54-32 138-30 190 6"/>
+            <path d="M510 356c52-26 122-24 166 10"/>
+        </g>
+
+        <g fill="#5A2612" opacity="0.75">
+            <ellipse cx="528" cy="404" rx="22" ry="14"/>
+            <ellipse cx="646" cy="440" rx="20" ry="12"/>
+            <ellipse cx="586" cy="478" rx="18" ry="11"/>
+            <ellipse cx="700" cy="392" rx="16" ry="10"/>
+            <ellipse cx="470" cy="452" rx="15" ry="9"/>
+        </g>
+
+        <g fill="#B4C97A" opacity="0.7">
+            <ellipse cx="556" cy="378" rx="16" ry="6" transform="rotate(-14 556 378)"/>
+            <ellipse cx="672" cy="474" rx="14" ry="5" transform="rotate(10 672 474)"/>
+        </g>
+    </g>
+
+    <ellipse cx="470" cy="330" rx="92" ry="42" fill="#F7F3EA" opacity="0.12" filter="url(#desenfoque)"/>
+
+    <rect width="1200" height="800" fill="url(#vineta)"/>
+    <rect width="1200" height="800" filter="url(#grano)" opacity="0.05" style="mix-blend-mode:overlay"/>
+</svg>

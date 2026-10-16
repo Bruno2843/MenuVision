@@ -2,8 +2,8 @@
 
 namespace Database\Factories;
 
-use App\Models\Table;
 use App\Models\QRCode;
+use App\Models\Table;
 use Illuminate\Database\Eloquent\Factories\Factory;
 use Illuminate\Support\Str;
 

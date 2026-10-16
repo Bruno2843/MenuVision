@@ -18,15 +18,16 @@
                 </a>
 
                 <nav class="hidden items-center gap-1 sm:flex">
-                    @foreach ($navigation as [$route, $label])
+                    @foreach ($navigation as [$route, $label, $icon])
                         <a
                             href="{{ route($route) }}"
                             @class([
-                                'rounded-lg px-3 py-1.5 text-sm font-medium transition',
-                                'bg-gold-500/10 text-gold-300' => request()->routeIs($route),
-                                'text-gray-400 hover:bg-gray-900 hover:text-gray-200' => ! request()->routeIs($route),
+                                'inline-flex items-center gap-2 rounded-lg px-3 py-1.5 text-sm font-medium transition',
+                                'bg-gold-500/10 text-gold-300' => request()->routeIs($route) || request()->routeIs($route.'.*'),
+                                'text-gray-400 hover:bg-gray-900 hover:text-gray-200' => ! request()->routeIs($route) && ! request()->routeIs($route.'.*'),
                             ])
                         >
+                            @include('partials.icon', ['icon' => $icon, 'iconClass' => 'h-4 w-4'])
                             {{ $label }}
                         </a>
                     @endforeach
@@ -41,7 +42,10 @@
                     </span>
                     <form method="POST" action="{{ route('logout') }}">
                         @csrf
-                        <button type="submit" class="text-sm text-gray-300 hover:text-gold-400">Cerrar sesión</button>
+                        <button type="submit" class="inline-flex items-center gap-1.5 text-sm text-gray-300 hover:text-gold-400">
+                            @include('partials.icon', ['icon' => 'salir', 'iconClass' => 'h-4 w-4'])
+                            <span class="hidden sm:inline">Cerrar sesión</span>
+                        </button>
                     </form>
                 </div>
             @endauth
