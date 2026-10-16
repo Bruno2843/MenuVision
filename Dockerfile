@@ -14,9 +14,11 @@ WORKDIR /var/www/html
 
 COPY . .
 
+
 RUN composer install --no-dev --optimize-autoloader --no-interaction \
-    && npm ci \
+    && npm ci --legacy-peer-deps \
     && npm run build
+
 
 RUN sed -i 's#/var/www/html#/var/www/html/public#g' \
     /etc/apache2/sites-available/000-default.conf \
