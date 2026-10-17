@@ -3,6 +3,7 @@
 set -e
 
 cd /var/www/html
+php artisan storage:link || true
 
 mkdir -p storage/framework/cache \
     storage/framework/sessions \
