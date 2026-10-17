@@ -16,7 +16,7 @@
         @csrf
         @method('PUT')
 
-        <div class="max-w-xl rounded-xl border border-gray-800 bg-gray-900 p-6">
+        <div class="max-w-xl rounded-xl border-2 border-gray-800 bg-gray-900 p-6">
             @include('admin.tables.form')
 
             <p class="mt-4 text-xs text-gray-500">
@@ -26,7 +26,7 @@
             <div class="mt-6 flex justify-end gap-3">
                 <a
                     href="{{ route('admin.tables.index') }}"
-                    class="rounded-lg border border-gray-700 px-4 py-2 text-sm font-medium text-gray-300 transition hover:bg-gray-800"
+                    class="rounded-lg border-2 border-gray-700 px-4 py-2 text-sm font-medium text-gray-300 transition hover:bg-gray-800"
                 >
                     Cancelar
                 </a>

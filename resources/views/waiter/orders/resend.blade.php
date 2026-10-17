@@ -4,20 +4,20 @@
 
 @section('content')
     <div class="mb-6">
-        <a href="{{ route('waiter.orders.show', $order) }}" class="text-sm text-gray-400 hover:text-gold-400">
+        <a href="{{ route('waiter.orders.show', $order) }}" class="text-sm text-cocina-gris transition hover:text-cocina-amarillo">
             ← Volver al pedido
         </a>
 
         <h1 class="mt-2 text-2xl font-bold text-white">
             Reenviar pedido #{{ $order->id }} · Mesa {{ $order->table->numero }}
         </h1>
-        <p class="text-sm text-gray-400">
+        <p class="text-sm text-cocina-gris">
             Cambiá lo que va a comer la mesa o, si sigue igual, avisale a cocina que lo prepare de igual manera.
         </p>
     </div>
 
     @if ($order->motivo_devolucion)
-        <div class="mb-6 rounded-xl border border-orange-900 bg-orange-950/40 p-4">
+        <div class="mb-6 rounded-xl border-2 border-orange-900 bg-orange-950/40 p-4">
             <p class="text-xs font-semibold uppercase tracking-wide text-orange-400">
                 La cocina no pudo prepararlo
             </p>
@@ -26,7 +26,7 @@
     @endif
 
     @if ($errors->any())
-        <div class="mb-4 rounded-lg border border-red-900 bg-red-950 px-4 py-3 text-sm text-red-300">
+        <div class="mb-4 rounded-lg border-2 border-red-600/50 bg-cocina-panel px-4 py-3 text-sm text-red-300">
             <ul class="list-inside list-disc">
                 @foreach ($errors->all() as $error)
                     <li>{{ $error }}</li>
@@ -41,11 +41,11 @@
 
         <div class="mb-6 grid gap-4 lg:grid-cols-2">
             <div>
-                <span class="mb-1 block text-sm font-medium text-gray-300">El pedido cambió?</span>
+                <span class="mb-1 block text-sm font-medium text-cocina-gris">El pedido cambió?</span>
 
                 <label
                     for="preparar_igual"
-                    class="flex items-start gap-3 rounded-xl border border-gray-800 bg-gray-900 p-4"
+                    class="flex items-start gap-3 rounded-xl border-2 border-cocina-amarillo/30 bg-cocina-panel p-4"
                 >
                     <input
                         type="checkbox"
@@ -53,11 +53,11 @@
                         name="preparar_igual"
                         value="1"
                         @checked(old('preparar_igual'))
-                        class="mt-0.5 h-4 w-4 shrink-0 rounded border-gray-700 bg-gray-800 text-gold-500 focus:ring-gold-500"
+                        class="mt-0.5 h-4 w-4 shrink-0 rounded border-cocina-amarillo/40 bg-cocina-fondo text-cocina-amarillo focus:ring-cocina-amarillo"
                     >
                     <span>
-                        <span class="block text-sm font-semibold text-gray-100">No, es el mismo pedido</span>
-                        <span class="block text-xs text-gray-400">
+                        <span class="block text-sm font-semibold text-white">No, es el mismo pedido</span>
+                        <span class="block text-xs text-cocina-gris">
                             Se le avisa a cocina que lo prepare de igual manera.
                         </span>
                     </span>
@@ -65,7 +65,7 @@
             </div>
 
             <div>
-                <label for="observaciones" class="mb-1 block text-sm font-medium text-gray-300">
+                <label for="observaciones" class="mb-1 block text-sm font-medium text-cocina-gris">
                     Observaciones para cocina
                 </label>
                 <textarea
@@ -73,22 +73,22 @@
                     name="observaciones"
                     rows="2"
                     maxlength="1000"
-                    class="w-full rounded-lg border border-gray-700 bg-gray-800 px-3 py-2 text-sm text-gray-100 placeholder-gray-500 focus:border-gold-500 focus:outline-none focus:ring-1 focus:ring-gold-500"
+                    class="w-full rounded-lg border-2 border-cocina-amarillo/30 bg-cocina-fondo px-3 py-2 text-sm text-white placeholder-cocina-gris/70 focus:border-cocina-amarillo focus:outline-none focus:ring-1 focus:ring-cocina-amarillo"
                 >{{ old('observaciones', $order->observaciones) }}</textarea>
             </div>
         </div>
 
         <section class="mb-6">
-            <h2 class="mb-2 border-l-4 border-gold-500 pl-3 text-lg font-semibold text-gray-50">
+            <h2 class="mb-2 border-l-2 border-cocina-amarillo pl-3 text-lg font-semibold text-white">
                 Platos del pedido
             </h2>
-            <p class="mb-3 text-sm text-gray-500">
+            <p class="mb-3 text-sm text-cocina-gris">
                 Poné 0 en los que la mesa ya no quiere.
             </p>
 
             @if ($lineas->isEmpty())
-                <p class="rounded-xl border border-dashed border-gray-700 bg-gray-900 p-6 text-center text-sm text-gray-500">
-                    Este pedido no tiene platos.
+                <p class="rounded-xl border-2 border-cocina-amarillo/25 bg-cocina-panel p-8 text-center text-cocina-gris">
+                    El pedido no tiene platos.
                 </p>
             @else
                 @include('waiter.partials.dish-picker', ['lineas' => $lineas])
@@ -97,29 +97,29 @@
 
         @forelse ($categorias as $categoria)
             <section class="mb-6">
-                <h2 class="mb-2 border-l-4 border-gray-700 pl-3 text-lg font-semibold text-gray-50">
+                <h2 class="mb-2 border-l-2 border-cocina-amarillo pl-3 text-lg font-semibold text-white">
                     {{ $categoria['nombre'] }}
                 </h2>
 
                 @include('waiter.partials.dish-picker', ['lineas' => $categoria['lineas']])
             </section>
         @empty
-            <p class="mb-6 rounded-xl border border-dashed border-gray-700 bg-gray-900 p-6 text-center text-sm text-gray-500">
-                No hay otros platos disponibles para agregar.
+            <p class="rounded-xl border-2 border-cocina-amarillo/25 bg-cocina-panel p-8 text-center text-cocina-gris">
+                No hay platos disponibles para agregar.
             </p>
         @endforelse
 
         <div class="flex flex-wrap justify-end gap-3">
             <a
                 href="{{ route('waiter.orders.show', $order) }}"
-                class="rounded-lg border border-gray-700 px-4 py-2 text-sm font-medium text-gray-300 transition hover:bg-gray-800"
+                class="rounded-lg border-2 border-cocina-amarillo/40 px-4 py-2 text-sm font-medium text-cocina-gris transition hover:bg-cocina-fondo"
             >
                 Cancelar
             </a>
 
             <button
                 type="submit"
-                class="rounded-lg bg-gold-500 px-4 py-2 text-sm font-semibold text-black transition hover:bg-gold-600"
+                class="rounded-lg bg-cocina-amarillo px-4 py-2 text-sm font-semibold text-black transition hover:brightness-110"
             >
                 Reenviar a cocina
             </button>

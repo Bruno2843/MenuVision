@@ -23,7 +23,7 @@
     <form method="GET" action="{{ route('admin.dishes.index') }}" class="mb-4 flex flex-wrap gap-3">
         <select
             name="categoria"
-            class="rounded-lg border border-gray-700 bg-gray-800 px-3 py-2 text-sm text-gray-100 focus:border-gold-500 focus:outline-none focus:ring-1 focus:ring-gold-500"
+            class="rounded-lg border-2 border-gray-700 bg-gray-800 px-3 py-2 text-sm text-gray-100 focus:border-gold-500 focus:outline-none focus:ring-1 focus:ring-gold-500"
         >
             <option value="">Todas las categorías</option>
             @foreach ($categories as $category)
@@ -38,12 +38,12 @@
             name="buscar"
             value="{{ $busqueda }}"
             placeholder="Buscar por nombre"
-            class="w-56 rounded-lg border border-gray-700 bg-gray-800 px-3 py-2 text-sm text-gray-100 placeholder-gray-500 focus:border-gold-500 focus:outline-none focus:ring-1 focus:ring-gold-500"
+            class="w-56 rounded-lg border-2 border-gray-700 bg-gray-800 px-3 py-2 text-sm text-gray-100 placeholder-gray-500 focus:border-gold-500 focus:outline-none focus:ring-1 focus:ring-gold-500"
         >
 
         <button
             type="submit"
-            class="rounded-lg border border-gold-600 px-4 py-2 text-sm font-semibold text-gold-400 transition hover:bg-gold-500/10"
+            class="rounded-lg border-2 border-gold-600 px-4 py-2 text-sm font-semibold text-gold-400 transition hover:bg-gold-500/10"
         >
             Filtrar
         </button>
@@ -58,7 +58,7 @@
         @endif
     </form>
 
-    <div class="overflow-x-auto rounded-xl border border-gray-800">
+    <div class="overflow-x-auto rounded-xl border-2 border-gray-800">
         <table class="w-full min-w-[52rem] text-left text-sm">
             <thead class="bg-gray-900 text-xs uppercase tracking-wide text-gray-500">
                 <tr>
@@ -72,7 +72,7 @@
                     <th scope="col" class="px-4 py-2 text-right font-medium">Acciones</th>
                 </tr>
             </thead>
-            <tbody class="divide-y divide-gray-800">
+            <tbody class="divide-y-2 divide-gray-800">
                 @forelse ($dishes as $dish)
                     <tr>
                         <td class="px-4 py-3">

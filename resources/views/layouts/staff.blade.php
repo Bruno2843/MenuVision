@@ -9,11 +9,11 @@
 
     @vite(['resources/css/app.css', 'resources/js/app.js'])
 </head>
-<body class="bg-gray-950 font-sans text-gray-100 antialiased">
-    <header class="border-b border-gold-600/40 bg-black text-gray-100">
+    <body class="bg-cocina-fondo font-sans text-white antialiased">
+    <header class="border-b-2 border-cocina-amarillo/40 bg-cocina-panel">
         <div class="mx-auto flex max-w-7xl items-center justify-between gap-4 px-4 py-3">
             <div class="flex items-center gap-6">
-                <a href="{{ route(auth()->user()->role->dashboardRoute()) }}" class="text-lg font-bold text-gold-400">
+                <a href="{{ route(auth()->user()->role->dashboardRoute()) }}" class="text-lg font-bold text-cocina-amarillo">
                     MenuVision
                 </a>
 
@@ -23,8 +23,8 @@
                             href="{{ route($route) }}"
                             @class([
                                 'inline-flex items-center gap-2 rounded-lg px-3 py-1.5 text-sm font-medium transition',
-                                'bg-gold-500/10 text-gold-300' => request()->routeIs($route) || request()->routeIs($route.'.*'),
-                                'text-gray-400 hover:bg-gray-900 hover:text-gray-200' => ! request()->routeIs($route) && ! request()->routeIs($route.'.*'),
+                                'bg-cocina-amarillo/10 text-cocina-amarillo' => request()->routeIs($route) || request()->routeIs($route.'.*'),
+                                'text-cocina-gris hover:bg-cocina-fondo hover:text-white' => ! request()->routeIs($route) && ! request()->routeIs($route.'.*'),
                             ])
                         >
                             @include('partials.icon', ['icon' => $icon, 'iconClass' => 'h-4 w-4'])
@@ -36,13 +36,15 @@
 
             @auth
                 <div class="flex items-center gap-3">
-                    <span class="hidden text-sm text-gray-400 sm:inline">{{ auth()->user()->name }}</span>
-                    <span class="rounded-full border border-gold-600/50 px-2 py-0.5 text-xs font-medium text-gold-300">
+                    @if (auth()->user()->name !== auth()->user()->role->label())
+                        <span class="hidden text-sm text-cocina-gris sm:inline">{{ auth()->user()->name }}</span>
+                    @endif
+                    <span class="rounded-full border-2 border-cocina-amarillo/50 px-2 py-0.5 text-xs font-medium text-cocina-amarillo">
                         {{ auth()->user()->role->label() }}
                     </span>
                     <form method="POST" action="{{ route('logout') }}">
                         @csrf
-                        <button type="submit" class="inline-flex items-center gap-1.5 text-sm text-gray-300 hover:text-gold-400">
+                        <button type="submit" class="inline-flex items-center gap-1.5 text-sm text-cocina-gris transition hover:text-cocina-amarillo">
                             @include('partials.icon', ['icon' => 'salir', 'iconClass' => 'h-4 w-4'])
                             <span class="hidden sm:inline">Cerrar sesión</span>
                         </button>

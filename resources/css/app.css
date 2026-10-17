@@ -5,14 +5,12 @@
 
 @theme {
     /*
-     * The staff panels (admin, waiter, kitchen) keep Instrument Sans, so their
-     * typography is left exactly as it was. The public menu uses Poppins as its
-     * single, high-impact face.
+     * Single typeface for the whole application: every panel and the public
+     * menu share Instrument Sans, so the kitchen, the waiter, the admin and the
+     * guest-facing menu all read as one product.
      */
     --font-sans: 'Instrument Sans', ui-sans-serif, system-ui, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji',
         'Segoe UI Symbol', 'Noto Color Emoji';
-
-    --font-marca: 'Poppins', ui-sans-serif, system-ui, -apple-system, 'Segoe UI', sans-serif;
 
     /*
      * Public menu palette: near-black surfaces under a saturated yellow. The
@@ -33,6 +31,17 @@
 
     --color-humo-100: #e3e3e3;
     --color-humo-300: #a6a6a6;
+
+    /*
+     * Kitchen panel palette: pure black surfaces under an intense yellow,
+     * with a bright green reserved for live/positive signals. It is its own
+     * scale so restyling the kitchen leaves the gold staff panels untouched.
+     */
+    --color-cocina-fondo: #030605;
+    --color-cocina-panel: #080c0b;
+    --color-cocina-amarillo: #ffd000;
+    --color-cocina-verde: #00e676;
+    --color-cocina-gris: #b7b7b7;
 
     --color-gold-50: #fbf8ee;
     --color-gold-100: #f6efd8;

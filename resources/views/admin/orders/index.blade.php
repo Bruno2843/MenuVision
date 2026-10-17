@@ -16,7 +16,7 @@
             <select
                 id="estado"
                 name="estado"
-                class="rounded-lg border border-gray-700 bg-gray-800 px-3 py-2 text-sm text-gray-100 focus:border-gold-500 focus:outline-none focus:ring-1 focus:ring-gold-500"
+                class="rounded-lg border-2 border-gray-700 bg-gray-800 px-3 py-2 text-sm text-gray-100 focus:border-gold-500 focus:outline-none focus:ring-1 focus:ring-gold-500"
             >
                 <option value="">Todos</option>
                 @foreach ($estados as $valor => $etiqueta)
@@ -32,7 +32,7 @@
             <select
                 id="mesa"
                 name="mesa"
-                class="rounded-lg border border-gray-700 bg-gray-800 px-3 py-2 text-sm text-gray-100 focus:border-gold-500 focus:outline-none focus:ring-1 focus:ring-gold-500"
+                class="rounded-lg border-2 border-gray-700 bg-gray-800 px-3 py-2 text-sm text-gray-100 focus:border-gold-500 focus:outline-none focus:ring-1 focus:ring-gold-500"
             >
                 <option value="">Todas</option>
                 @foreach ($tables as $table)
@@ -50,13 +50,13 @@
                 type="date"
                 name="desde"
                 value="{{ $desde }}"
-                class="rounded-lg border border-gray-700 bg-gray-800 px-3 py-2 text-sm text-gray-100 focus:border-gold-500 focus:outline-none focus:ring-1 focus:ring-gold-500"
+                class="rounded-lg border-2 border-gray-700 bg-gray-800 px-3 py-2 text-sm text-gray-100 focus:border-gold-500 focus:outline-none focus:ring-1 focus:ring-gold-500"
             >
         </div>
 
         <button
             type="submit"
-            class="rounded-lg border border-gold-600 px-4 py-2 text-sm font-semibold text-gold-400 transition hover:bg-gold-500/10"
+            class="rounded-lg border-2 border-gold-600 px-4 py-2 text-sm font-semibold text-gold-400 transition hover:bg-gold-500/10"
         >
             Filtrar
         </button>
@@ -68,7 +68,7 @@
         @endif
     </form>
 
-    <div class="overflow-x-auto rounded-xl border border-gray-800">
+    <div class="overflow-x-auto rounded-xl border-2 border-gray-800">
         <table class="w-full min-w-[48rem] text-left text-sm">
             <thead class="bg-gray-900 text-xs tracking-wide text-gray-500 uppercase">
                 <tr>
@@ -80,7 +80,7 @@
                     <th scope="col" class="px-4 py-2 text-right font-medium">Cuando</th>
                 </tr>
             </thead>
-            <tbody class="divide-y divide-gray-800">
+            <tbody class="divide-y-2 divide-gray-800">
                 @forelse ($orders as $order)
                     <tr>
                         <td class="px-4 py-3">

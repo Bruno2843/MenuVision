@@ -16,7 +16,7 @@
         <section class="lg:col-span-2">
             <h2 class="mb-3 text-lg font-semibold text-white">Platos</h2>
 
-            <div class="overflow-x-auto rounded-xl border border-gray-800">
+            <div class="overflow-x-auto rounded-xl border-2 border-gray-800">
                 <table class="w-full min-w-[30rem] text-left text-sm">
                     <thead class="bg-gray-900 text-xs tracking-wide text-gray-500 uppercase">
                         <tr>
@@ -26,7 +26,7 @@
                             <th scope="col" class="px-4 py-2 text-right font-medium">Subtotal</th>
                         </tr>
                     </thead>
-                    <tbody class="divide-y divide-gray-800">
+                    <tbody class="divide-y-2 divide-gray-800">
                         @foreach ($order->items as $item)
                             <tr>
                                 <td class="px-4 py-3 text-gray-100">
@@ -69,7 +69,7 @@
         <section>
             <h2 class="mb-3 text-lg font-semibold text-white">Detalle</h2>
 
-            <dl class="space-y-3 rounded-xl border border-gray-800 bg-gray-900 p-5 text-sm">
+            <dl class="space-y-3 rounded-xl border-2 border-gray-800 bg-gray-900 p-5 text-sm">
                 <div>
                     <dt class="text-xs tracking-wide text-gray-500 uppercase">Estado</dt>
                     <dd class="mt-1">

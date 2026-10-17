@@ -27,9 +27,9 @@
         id="admin-sidebar"
         data-sidebar
         aria-label="Navegación de administración"
-        class="fixed inset-y-0 left-0 z-40 flex w-72 -translate-x-full flex-col border-r border-gray-800 bg-gray-900 transition-transform duration-200 lg:translate-x-0"
+        class="fixed inset-y-0 left-0 z-40 flex w-72 -translate-x-full flex-col border-r-2 border-gray-800 bg-gray-900 transition-transform duration-200 lg:translate-x-0"
     >
-        <div class="flex items-center justify-between gap-2 border-b border-gray-800 px-5 py-4">
+        <div class="flex items-center justify-between gap-2 border-b-2 border-gray-800 px-5 py-4">
             <a href="{{ route('admin.dashboard') }}" class="text-lg font-bold text-gold-400">
                 MenuVision
             </a>
@@ -63,7 +63,7 @@
             @endforeach
         </nav>
 
-        <div class="border-t border-gray-800 px-5 py-4">
+        <div class="border-t-2 border-gray-800 px-5 py-4">
             <p class="truncate text-sm font-medium text-gray-200">{{ auth()->user()->name }}</p>
             <p class="mt-0.5 text-xs text-gray-500">{{ auth()->user()->email }}</p>
 
@@ -78,7 +78,7 @@
     </aside>
 
     <div class="lg:pl-72">
-        <header class="sticky top-0 z-20 border-b border-gray-800 bg-gray-950/95 backdrop-blur lg:hidden">
+        <header class="sticky top-0 z-20 border-b-2 border-gray-800 bg-gray-950/95 backdrop-blur lg:hidden">
             <div class="flex items-center justify-between gap-3 px-4 py-3">
                 <button
                     type="button"
@@ -91,7 +91,7 @@
 
                 <span class="text-base font-bold text-gold-400">MenuVision</span>
 
-                <span class="rounded-full border border-gold-600/50 px-2 py-0.5 text-xs font-medium text-gold-300">
+                <span class="rounded-full border-2 border-gold-600/50 px-2 py-0.5 text-xs font-medium text-gold-300">
                     {{ auth()->user()->role->label() }}
                 </span>
             </div>

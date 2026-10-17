@@ -2,8 +2,10 @@ import GLBViewer from './3d/viewer';
 import { startAdminSidebar } from './admin-sidebar';
 import { startCategoryNav } from './category-nav';
 import { startImageFallbacks } from './imagen-respaldo';
+import { startKitchenBoardFilter } from './kitchen/board-filter';
 import QRScanner from './qr-scanner';
 import { startLiveRefresh } from './live-refresh';
+import { startOrderBuilder } from './waiter/order-builder';
 import { startWaiterQrScanner } from './waiter/qr-scanner';
 
 // The kitchen and waiter dashboards mark their live area with `data-poll-url`.
@@ -28,6 +30,17 @@ startImageFallbacks();
 // overlay it opens lives next to it. On the other panels, and on the public
 // menu, this call is a no-op.
 startWaiterQrScanner();
+
+// The order form marks its dish list with `data-order-items` and its catalog
+// overlay with `data-order-picker`, so the waiter can add dishes to the order
+// being taken. Elsewhere this call is a no-op.
+startOrderBuilder();
+
+// The kitchen board marks its live region with `data-kitchen-board`, its status
+// tabs with `data-kitchen-filter` and its cards with `data-order-state`. The
+// filter is kept across the board's live refreshes. Elsewhere this call is a
+// no-op.
+startKitchenBoardFilter();
 
 // The dish detail shows a 3D model with `<model-viewer>` and a "Ver en mi
 // espacio" button. The runtime is pulled in only when that page is the one

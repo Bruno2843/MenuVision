@@ -27,12 +27,12 @@
          shown verbatim, and a local-only host is called out instead of waiting for
          a client to report that their scan did nothing. --}}
     @if ($problemaQr)
-        <div class="mb-6 rounded-xl border border-amber-900 bg-amber-950 px-4 py-3 text-sm text-amber-200">
+        <div class="mb-6 rounded-xl border-2 border-amber-900 bg-amber-950 px-4 py-3 text-sm text-amber-200">
             {{ $problemaQr }}
         </div>
     @endif
 
-    <div class="mb-6 rounded-xl border border-gray-800 bg-gray-900 p-5">
+    <div class="mb-6 rounded-xl border-2 border-gray-800 bg-gray-900 p-5">
         <h2 class="text-sm font-semibold text-white">QR del acceso al personal</h2>
         <p class="mt-1 text-sm text-gray-400">
             Este código abre la pantalla de acceso para mozos y cocina. Imprimilo una vez,
@@ -45,13 +45,13 @@
                 alt="Código QR del acceso al personal"
                 width="120"
                 height="120"
-                class="h-28 w-28 rounded-lg border border-gray-800 bg-white p-1"
+                class="h-28 w-28 rounded-lg border-2 border-gray-800 bg-white p-1"
             >
 
             <a
                 href="{{ route('qr.personal') }}"
                 download="menuvision-personal-qr.png"
-                class="rounded-lg border border-gold-600 px-4 py-2 text-sm font-semibold text-gold-400 transition hover:bg-gold-500/10"
+                class="rounded-lg border-2 border-gold-600 px-4 py-2 text-sm font-semibold text-gold-400 transition hover:bg-gold-500/10"
             >
                 Descargar PNG
             </a>
@@ -64,7 +64,7 @@
 
     <div class="grid gap-4 sm:grid-cols-2 xl:grid-cols-3">
         @forelse ($tables as $table)
-            <div class="flex flex-col rounded-xl border border-gray-800 bg-gray-900 p-5">
+            <div class="flex flex-col rounded-xl border-2 border-gray-800 bg-gray-900 p-5">
                 <div class="flex items-start justify-between gap-3">
                     <div>
                         <h2 class="text-lg font-semibold text-white">Mesa {{ $table->numero }}</h2>
@@ -89,7 +89,7 @@
                         width="120"
                         height="120"
                         loading="lazy"
-                        class="mx-auto mt-4 h-40 w-40 rounded-lg border border-gray-800 bg-white p-1"
+                        class="mx-auto mt-4 h-40 w-40 rounded-lg border-2 border-gray-800 bg-white p-1"
                     >
 
                     <p class="mt-3 truncate text-center font-mono text-xs text-gray-500">
@@ -107,7 +107,7 @@
                         <a
                             href="{{ route('qr.menu', $table->qrCode->code) }}"
                             download="mesa-{{ $table->numero }}-qr.png"
-                            class="rounded-lg border border-gold-600 px-3 py-1.5 text-xs font-semibold text-gold-400 transition hover:bg-gold-500/10"
+                            class="rounded-lg border-2 border-gold-600 px-3 py-1.5 text-xs font-semibold text-gold-400 transition hover:bg-gold-500/10"
                         >
                             Descargar
                         </a>
@@ -120,7 +120,7 @@
                             <button
                                 type="submit"
                                 onclick="return confirm('Se genera un código nuevo y el sticker impreso de esta mesa deja de funcionar. ¿Seguir?')"
-                                class="rounded-lg border border-gray-700 px-3 py-1.5 text-xs font-medium text-gray-300 transition hover:bg-gray-800"
+                                class="rounded-lg border-2 border-gray-700 px-3 py-1.5 text-xs font-medium text-gray-300 transition hover:bg-gray-800"
                             >
                                 Nuevo código
                             </button>
@@ -128,13 +128,13 @@
 
                         <a
                             href="{{ route('admin.tables.edit', $table) }}"
-                            class="rounded-lg border border-gray-700 px-3 py-1.5 text-xs font-medium text-gray-300 transition hover:bg-gray-800"
+                            class="rounded-lg border-2 border-gray-700 px-3 py-1.5 text-xs font-medium text-gray-300 transition hover:bg-gray-800"
                         >
                             Editar
                         </a>
                     </div>
                 @else
-                    <p class="mt-4 rounded-lg border border-amber-900 bg-amber-950 px-3 py-2 text-xs text-amber-300">
+                    <p class="mt-4 rounded-lg border-2 border-amber-900 bg-amber-950 px-3 py-2 text-xs text-amber-300">
                         Esta mesa no tiene código QR.
                     </p>
 
@@ -142,7 +142,7 @@
                         @csrf
                         <button
                             type="submit"
-                            class="w-full rounded-lg border border-gold-600 px-3 py-1.5 text-xs font-semibold text-gold-400 transition hover:bg-gold-500/10"
+                            class="w-full rounded-lg border-2 border-gold-600 px-3 py-1.5 text-xs font-semibold text-gold-400 transition hover:bg-gold-500/10"
                         >
                             Crear código QR
                         </button>
@@ -162,7 +162,7 @@
                 </form>
             </div>
         @empty
-            <p class="rounded-xl border border-dashed border-gray-700 bg-gray-900 p-8 text-center text-sm text-gray-500 sm:col-span-2 xl:col-span-3">
+            <p class="rounded-xl border-2 border-dashed border-gray-700 bg-gray-900 p-8 text-center text-sm text-gray-500 sm:col-span-2 xl:col-span-3">
                 Todavía no hay mesas.
             </p>
         @endforelse

@@ -6,7 +6,7 @@
     <div class="mb-6 flex flex-wrap items-center justify-between gap-3">
         <div>
             <h1 class="text-2xl font-bold text-white">Pedidos del mozo</h1>
-            <p class="text-sm text-gray-400">Revisá y confirmá los pedidos de las mesas.</p>
+            <p class="text-sm text-cocina-gris">Revisá y confirmá los pedidos de las mesas.</p>
         </div>
 
         <div class="flex flex-wrap items-center gap-3">
@@ -14,7 +14,7 @@
                 type="button"
                 data-waiter-scan
                 data-resolve-url="{{ route('waiter.qr.resolve') }}"
-                class="inline-flex items-center gap-2 rounded-lg border border-gold-600 px-4 py-2 text-sm font-semibold text-gold-400 transition hover:bg-gold-500/10"
+                class="inline-flex items-center gap-2 rounded-lg border-2 border-cocina-amarillo/60 px-4 py-2 text-sm font-semibold text-cocina-amarillo transition hover:bg-cocina-amarillo/10"
             >
                 @include('partials.icon', ['icon' => 'qr', 'iconClass' => 'h-4 w-4'])
                 Escanear QR
@@ -22,7 +22,7 @@
 
             <a
                 href="{{ route('waiter.orders.create') }}"
-                class="rounded-lg bg-gold-500 px-4 py-2 text-sm font-semibold text-black transition hover:bg-gold-600"
+                class="rounded-lg bg-cocina-amarillo px-4 py-2 text-sm font-semibold text-black transition hover:brightness-110"
             >
                 Tomar pedido
             </a>
@@ -32,13 +32,13 @@
     @include('waiter.partials.qr-scanner')
 
     @if (session('status'))
-        <div class="mb-4 rounded-lg border border-green-900 bg-green-950 px-4 py-3 text-sm text-green-300">
+        <div class="mb-4 rounded-lg border-2 border-cocina-verde/50 bg-cocina-panel px-4 py-3 text-sm text-cocina-verde">
             {{ session('status') }}
         </div>
     @endif
 
     @if (session('error'))
-        <div class="mb-4 rounded-lg border border-red-900 bg-red-950 px-4 py-3 text-sm text-red-300">
+        <div class="mb-4 rounded-lg border-2 border-red-500/50 bg-cocina-panel px-4 py-3 text-sm text-red-300">
             {{ session('error') }}
         </div>
     @endif

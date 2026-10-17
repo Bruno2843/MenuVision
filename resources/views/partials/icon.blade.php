@@ -130,6 +130,28 @@
             <path d="M17 8.5 20.5 12 17 15.5M20 12H9" />
             @break
 
+        @case('gorro')
+            <path d="M7 20.4h10" />
+            <path d="M7.6 20.4v-3.2a4.6 4.6 0 0 1-2.2-3.9 3.4 3.4 0 0 1 2.6-3.3 4.2 4.2 0 0 1 8 0 3.4 3.4 0 0 1 2.6 3.3 4.6 4.6 0 0 1-2.2 3.9v3.2" />
+            <path d="M9.6 17.2h4.8" />
+            @break
+
+        @case('reloj')
+            <circle cx="12" cy="12" r="8.5" />
+            <path d="M12 7.5V12l3 2" />
+            @break
+
+        @case('info')
+            <circle cx="12" cy="12" r="8.5" />
+            <path d="M12 11v5" />
+            <path d="M12 7.8h.01" />
+            @break
+
+        @case('flecha')
+            <path d="M4 12h15" />
+            <path d="M13 6l6 6-6 6" />
+            @break
+
         @default
             <circle cx="12" cy="12" r="8" />
     @endswitch

@@ -19,7 +19,7 @@
 
     @include('admin.partials.flash')
 
-    <div class="overflow-hidden rounded-xl border border-gray-800">
+    <div class="overflow-hidden rounded-xl border-2 border-gray-800">
         <table class="w-full text-left text-sm">
             <thead class="bg-gray-900 text-xs uppercase tracking-wide text-gray-500">
                 <tr>
@@ -30,7 +30,7 @@
                     <th scope="col" class="px-4 py-2 text-right font-medium">Acciones</th>
                 </tr>
             </thead>
-            <tbody class="divide-y divide-gray-800">
+            <tbody class="divide-y-2 divide-gray-800">
                 @forelse ($categories as $category)
                     <tr>
                         <td class="px-4 py-3 text-gray-500">{{ $category->orden }}</td>

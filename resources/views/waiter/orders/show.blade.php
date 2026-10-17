@@ -6,7 +6,7 @@
 
 @section('content')
     <div class="mb-6">
-        <a href="{{ route('waiter.dashboard') }}" class="text-sm text-gray-400 hover:text-gold-400">
+        <a href="{{ route('waiter.dashboard') }}" class="text-sm text-cocina-gris hover:text-cocina-amarillo">
             ← Volver a los pedidos
         </a>
 
@@ -15,7 +15,7 @@
                 <h1 class="text-2xl font-bold text-white">
                     Pedido #{{ $order->id }} · Mesa {{ $order->table->numero }}
                 </h1>
-                    <p class="text-sm text-gray-400">
+                    <p class="text-sm text-cocina-gris">
                         {{ $order->created_at->format('d/m/Y H:i') }}
                         @if ($order->user)
                             · Mozo: {{ $order->user->name }}
@@ -23,30 +23,30 @@
                     </p>
             </div>
 
-            <span class="rounded-full px-3 py-1 text-sm font-medium {{ $order->estado->badgeClasses() }}">
+            <span class="inline-flex items-center rounded-full border-2 border-current px-3 py-1 text-xs font-medium {{ $order->estado->badgeClasses() }}">
                 {{ $order->estado->label() }}
             </span>
         </div>
     </div>
 
     @if (session('status'))
-        <div class="mb-4 rounded-lg border border-green-900 bg-green-950 px-4 py-3 text-sm text-green-300">
+        <div class="mb-4 rounded-lg border-2 border-cocina-verde/50 bg-cocina-panel px-4 py-3 text-sm text-cocina-verde">
             {{ session('status') }}
         </div>
     @endif
 
     @if (session('error'))
-        <div class="mb-4 rounded-lg border border-red-900 bg-red-950 px-4 py-3 text-sm text-red-300">
+        <div class="mb-4 rounded-lg border-2 border-red-900 bg-red-950 px-4 py-3 text-sm text-red-300">
             {{ session('error') }}
         </div>
     @endif
 
-    <div class="mb-6 rounded-xl border border-gray-800 bg-gray-900 p-4 sm:p-5">
+    <div class="mb-6 rounded-xl border-2 border-cocina-amarillo/30 bg-cocina-panel p-4 sm:p-5">
         @include('waiter.partials.order-progress', ['estado' => $order->estado])
     </div>
 
     @if ($order->motivo_devolucion)
-        <div class="mb-6 rounded-xl border border-orange-900 bg-orange-950/40 p-4">
+        <div class="mb-6 rounded-xl border-2 border-orange-900 bg-orange-950/40 p-4">
             <p class="text-xs font-semibold uppercase tracking-wide text-orange-400">
                 La cocina no pudo prepararlo
             </p>
@@ -54,9 +54,9 @@
         </div>
     @endif
 
-    <div class="mb-6 overflow-hidden rounded-xl border border-gray-800">
+    <div class="mb-6 overflow-hidden rounded-xl border-2 border-cocina-amarillo/30 bg-cocina-panel">
         <table class="w-full text-left text-sm">
-            <thead class="bg-gray-900 text-xs uppercase tracking-wide text-gray-500">
+            <thead class="bg-cocina-fondo text-xs uppercase tracking-wide text-cocina-gris">
                 <tr>
                     <th scope="col" class="px-4 py-2 font-medium">Plato</th>
                     <th scope="col" class="px-4 py-2 text-center font-medium">Cantidad</th>
@@ -64,29 +64,29 @@
                     <th scope="col" class="px-4 py-2 text-right font-medium">Subtotal</th>
                 </tr>
             </thead>
-            <tbody class="divide-y divide-gray-800">
+            <tbody class="divide-y-2 divide-cocina-amarillo/15">
                 @foreach ($order->items as $item)
                     <tr>
-                        <td class="px-4 py-3 font-medium text-gray-100">
+                        <td class="px-4 py-3 font-medium text-white">
                             {{ $item->dish->nombre }}
                             @if ($item->observaciones)
-                                <p class="mt-0.5 text-xs text-gray-500">{{ $item->observaciones }}</p>
+                                <p class="mt-0.5 text-xs text-cocina-gris">{{ $item->observaciones }}</p>
                             @endif
                         </td>
-                        <td class="px-4 py-3 text-center text-gray-300">{{ $item->cantidad }}</td>
-                        <td class="px-4 py-3 text-right text-gray-400">
+                        <td class="px-4 py-3 text-center text-cocina-gris">{{ $item->cantidad }}</td>
+                        <td class="px-4 py-3 text-right text-cocina-gris">
                             ${{ number_format($item->precio_unitario, 2) }}
                         </td>
-                        <td class="px-4 py-3 text-right font-semibold text-gold-400">
+                        <td class="px-4 py-3 text-right font-semibold text-cocina-amarillo">
                             ${{ number_format($item->cantidad * (float) $item->precio_unitario, 2) }}
                         </td>
                     </tr>
                 @endforeach
             </tbody>
-            <tfoot class="bg-gray-900">
+            <tfoot class="bg-cocina-fondo">
                 <tr>
-                    <th scope="row" colspan="3" class="px-4 py-3 text-right font-medium text-gray-300">Total</th>
-                    <td class="px-4 py-3 text-right text-lg font-bold text-gold-400">
+                    <th scope="row" colspan="3" class="px-4 py-3 text-right font-medium text-cocina-gris">Total</th>
+                    <td class="px-4 py-3 text-right text-lg font-bold text-cocina-amarillo">
                         ${{ number_format($order->total(), 2) }}
                     </td>
                 </tr>
@@ -95,9 +95,9 @@
     </div>
 
     @if ($order->observaciones)
-        <div class="mb-6 rounded-xl border border-gray-800 bg-gray-900 p-4">
-            <p class="text-xs font-semibold uppercase tracking-wide text-gray-500">Observaciones</p>
-            <p class="mt-1 text-sm text-gray-300">{{ $order->observaciones }}</p>
+        <div class="mb-6 rounded-xl border-2 border-cocina-amarillo/30 bg-cocina-panel p-4">
+            <p class="text-xs font-semibold uppercase tracking-wide text-cocina-gris">Observaciones</p>
+            <p class="mt-1 text-sm text-cocina-gris">{{ $order->observaciones }}</p>
         </div>
     @endif
 
@@ -109,7 +109,7 @@
     @if ($devueltoPorCocina || $transiciones !== [])
         <div class="flex flex-wrap items-center justify-between gap-3">
             @if ($devueltoPorCocina)
-                <p class="text-sm text-gray-400">
+                <p class="text-sm text-cocina-gris">
                     Cambiá lo que va a comer la mesa, reenvialo a cocina o rechazalo.
                 </p>
             @endif
@@ -120,7 +120,7 @@
                 @if ($devueltoPorCocina)
                     <a
                         href="{{ route('waiter.orders.resend', $order) }}"
-                        class="rounded-lg bg-gold-500 px-4 py-2 text-sm font-semibold text-black transition hover:bg-gold-600"
+                        class="rounded-lg bg-cocina-amarillo px-4 py-2 text-sm font-semibold text-black transition hover:brightness-110"
                     >
                         Reenviar a cocina
                     </a>
@@ -133,7 +133,7 @@
                         <input type="hidden" name="estado" value="{{ OrderStatus::Rechazado->value }}">
                         <button
                             type="submit"
-                            class="rounded-lg border border-red-900 px-4 py-2 text-sm font-semibold text-red-300 transition hover:bg-red-950"
+                            class="rounded-lg border-2 border-red-900 px-4 py-2 text-sm font-semibold text-red-300 transition hover:bg-red-950"
                         >
                             Rechazar
                         </button>
@@ -147,7 +147,7 @@
                         <input type="hidden" name="estado" value="{{ OrderStatus::Confirmado->value }}">
                         <button
                             type="submit"
-                            class="rounded-lg bg-gold-500 px-4 py-2 text-sm font-semibold text-black transition hover:bg-gold-600"
+                            class="rounded-lg bg-cocina-amarillo px-4 py-2 text-sm font-semibold text-black transition hover:brightness-110"
                         >
                             Confirmar pedido
                         </button>

@@ -12,14 +12,14 @@
 
     {{-- The four headline numbers. --}}
     <div class="grid gap-4 sm:grid-cols-2 xl:grid-cols-4">
-        <div class="rounded-xl border border-gray-800 bg-gray-900 p-5">
+        <div class="rounded-xl border-2 border-gray-800 bg-gray-900 p-5">
             <p class="text-sm text-gray-400">Ingresos de pedidos entregados</p>
             <p class="mt-2 text-3xl font-bold tabular-nums text-gold-400">
                 ${{ number_format($ingresos, 2) }}
             </p>
         </div>
 
-        <div class="rounded-xl border border-gray-800 bg-gray-900 p-5">
+        <div class="rounded-xl border-2 border-gray-800 bg-gray-900 p-5">
             <p class="text-sm text-gray-400">Pedidos</p>
             <p class="mt-2 text-3xl font-bold tabular-nums text-white">{{ $pedidos['total'] }}</p>
             <p class="mt-1 text-xs text-gray-500">
@@ -27,13 +27,13 @@
             </p>
         </div>
 
-        <div class="rounded-xl border border-gray-800 bg-gray-900 p-5">
+        <div class="rounded-xl border-2 border-gray-800 bg-gray-900 p-5">
             <p class="text-sm text-gray-400">Mesas</p>
             <p class="mt-2 text-3xl font-bold tabular-nums text-white">{{ $mesas['total'] }}</p>
             <p class="mt-1 text-xs text-gray-500">{{ $mesas['ocupadas'] }} ocupadas ahora</p>
         </div>
 
-        <div class="rounded-xl border border-gray-800 bg-gray-900 p-5">
+        <div class="rounded-xl border-2 border-gray-800 bg-gray-900 p-5">
             <p class="text-sm text-gray-400">Platos</p>
             <p class="mt-2 text-3xl font-bold tabular-nums text-white">{{ $menu['platos'] }}</p>
             <p class="mt-1 text-xs text-gray-500">
@@ -47,9 +47,9 @@
         <section class="lg:col-span-1">
             <h2 class="mb-3 text-lg font-semibold text-white">Pedidos por estado</h2>
 
-            <ul class="overflow-hidden rounded-xl border border-gray-800">
+            <ul class="overflow-hidden rounded-xl border-2 border-gray-800">
                 @foreach ($pedidos['porEstado'] as $fila)
-                    <li class="flex items-center justify-between gap-3 border-b border-gray-800 bg-gray-900 px-4 py-2.5 last:border-b-0">
+                    <li class="flex items-center justify-between gap-3 border-b-2 border-gray-800 bg-gray-900 px-4 py-2.5 last:border-b-0">
                         <span @class([
                             'rounded-full px-2.5 py-0.5 text-xs font-medium',
                             $fila['estado']->badgeClasses(),
@@ -66,9 +66,9 @@
         <section class="lg:col-span-1">
             <h2 class="mb-3 text-lg font-semibold text-white">Platos más pedidos</h2>
 
-            <ul class="overflow-hidden rounded-xl border border-gray-800">
+            <ul class="overflow-hidden rounded-xl border-2 border-gray-800">
                 @forelse ($pedidos['topPlatos'] as $fila)
-                    <li class="flex items-center justify-between gap-3 border-b border-gray-800 bg-gray-900 px-4 py-2.5 last:border-b-0">
+                    <li class="flex items-center justify-between gap-3 border-b-2 border-gray-800 bg-gray-900 px-4 py-2.5 last:border-b-0">
                         <span class="truncate text-sm text-gray-200">{{ $fila['dish']->nombre }}</span>
                         <span class="shrink-0 tabular-nums text-gray-400">{{ $fila['cantidad'] }}</span>
                     </li>
@@ -87,7 +87,7 @@
             <div class="space-y-3">
                 <a
                     href="{{ route('admin.dishes.index') }}"
-                    class="flex items-center justify-between gap-3 rounded-xl border border-gray-800 bg-gray-900 px-4 py-3 transition hover:border-gold-600/60"
+                    class="flex items-center justify-between gap-3 rounded-xl border-2 border-gray-800 bg-gray-900 px-4 py-3 transition hover:border-gold-600/60"
                 >
                     <span class="text-sm text-gray-300">Platos sin foto</span>
                     <span class="tabular-nums text-gray-400">{{ $menu['sinFoto'] }}</span>
@@ -95,7 +95,7 @@
 
                 <a
                     href="{{ route('admin.dishes.index') }}"
-                    class="flex items-center justify-between gap-3 rounded-xl border border-gray-800 bg-gray-900 px-4 py-3 transition hover:border-gold-600/60"
+                    class="flex items-center justify-between gap-3 rounded-xl border-2 border-gray-800 bg-gray-900 px-4 py-3 transition hover:border-gold-600/60"
                 >
                     <span class="text-sm text-gray-300">Platos sin modelo 3D</span>
                     <span class="tabular-nums text-gray-400">{{ $menu['sinModelo'] }}</span>
@@ -103,7 +103,7 @@
 
                 <a
                     href="{{ route('admin.tables.index') }}"
-                    class="flex items-center justify-between gap-3 rounded-xl border border-gray-800 bg-gray-900 px-4 py-3 transition hover:border-gold-600/60"
+                    class="flex items-center justify-between gap-3 rounded-xl border-2 border-gray-800 bg-gray-900 px-4 py-3 transition hover:border-gold-600/60"
                 >
                     <span class="text-sm text-gray-300">Mesas y códigos QR</span>
                     <span class="tabular-nums text-gray-400">{{ $mesas['total'] }}</span>
@@ -111,7 +111,7 @@
 
                 <a
                     href="{{ route('admin.users.index') }}"
-                    class="flex items-center justify-between gap-3 rounded-xl border border-gray-800 bg-gray-900 px-4 py-3 transition hover:border-gold-600/60"
+                    class="flex items-center justify-between gap-3 rounded-xl border-2 border-gray-800 bg-gray-900 px-4 py-3 transition hover:border-gold-600/60"
                 >
                     <span class="text-sm text-gray-300">
                         Usuarios activos
@@ -133,7 +133,7 @@
             </a>
         </div>
 
-        <div class="overflow-x-auto rounded-xl border border-gray-800">
+        <div class="overflow-x-auto rounded-xl border-2 border-gray-800">
             <table class="w-full min-w-[40rem] text-left text-sm">
                 <thead class="bg-gray-900 text-xs tracking-wide text-gray-500 uppercase">
                     <tr>
@@ -144,7 +144,7 @@
                         <th scope="col" class="px-4 py-2 text-right font-medium">Cuando</th>
                     </tr>
                 </thead>
-                <tbody class="divide-y divide-gray-800">
+                <tbody class="divide-y-2 divide-gray-800">
                     @forelse ($ultimosPedidos as $order)
                         <tr>
                             <td class="px-4 py-3">

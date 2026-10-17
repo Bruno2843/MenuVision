@@ -20,16 +20,16 @@
         <li class="flex flex-1 flex-col items-center text-center">
             <div class="flex w-full items-center">
                 <span
-                    class="h-0.5 flex-1 {{ $loop->first ? 'bg-transparent' : ($completado || $actual ? 'bg-gold-500' : 'bg-gray-700') }}"
+                    class="h-0.5 flex-1 {{ $loop->first ? 'bg-transparent' : ($completado || $actual ? 'bg-cocina-amarillo' : 'bg-cocina-amarillo/20') }}"
                 ></span>
 
                 <span
                     @class([
                         'flex h-3.5 w-3.5 shrink-0 items-center justify-center rounded-full',
-                        'bg-gold-500' => $actual,
-                        'ring-4 ring-gold-500/20' => $actual,
-                        'bg-gold-500' => $completado,
-                        'bg-gray-700' => ! $completado && ! $actual,
+                        'bg-cocina-amarillo' => $actual,
+                        'ring-4 ring-cocina-amarillo/20' => $actual,
+                        'bg-cocina-amarillo' => $completado,
+                        'bg-cocina-amarillo/25' => ! $completado && ! $actual,
                     ])
                 >
                     @if ($completado)
@@ -38,7 +38,7 @@
                 </span>
 
                 <span
-                    class="h-0.5 flex-1 {{ $loop->last ? 'bg-transparent' : ($completado ? 'bg-gold-500' : 'bg-gray-700') }}"
+                    class="h-0.5 flex-1 {{ $loop->last ? 'bg-transparent' : ($completado ? 'bg-cocina-amarillo' : 'bg-cocina-amarillo/15') }}"
                 ></span>
             </div>
 
@@ -46,8 +46,8 @@
                 @class([
                     'mt-2 px-1 text-[11px] leading-tight',
                     'font-semibold text-white' => $actual,
-                    'text-gold-400' => $completado && ! $actual,
-                    'text-gray-500' => ! $completado && ! $actual,
+                    'text-cocina-amarillo' => $completado && ! $actual,
+                    'text-cocina-gris' => ! $completado && ! $actual,
                 ])
             >
                 {{ $paso->label() }}

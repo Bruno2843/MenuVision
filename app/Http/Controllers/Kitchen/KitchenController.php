@@ -21,7 +21,7 @@ class KitchenController extends Controller
 
     /**
      * Return only the live part of the board, polled by the front end to keep
-     * the kitchen columns fresh without a full page reload.
+     * the kitchen list fresh without a full page reload.
      */
     public function board(): View
     {
@@ -69,6 +69,11 @@ class KitchenController extends Controller
      * The data behind the kitchen board, shared by the full page and the
      * polled fragment so the queries are never duplicated.
      *
+     * The set of statuses is the one the kitchen has always owned: an order
+     * reaches this board once the waiter confirmed it, and leaves it when it
+     * is delivered. Only the shape of the data changed for the list layout;
+     * what is shown and what is excluded is exactly as before.
+     *
      * @return array<string, mixed>
      */
     private function boardData(): array
@@ -85,18 +90,12 @@ class KitchenController extends Controller
                 fn (OrderStatus $estado): string => $estado->value,
                 $states
             ))
-            ->with(['table', 'items.dish'])
+            ->with(['table', 'user', 'items.dish.category'])
             ->oldest()
             ->get();
 
         return [
-            'columns' => array_map(
-                fn (OrderStatus $estado): array => [
-                    'estado' => $estado,
-                    'orders' => $orders->where('estado', $estado)->values(),
-                ],
-                $states
-            ),
+            'orders' => $orders,
             'delivered' => Order::query()
                 ->where('estado', OrderStatus::Entregado)
                 ->with('table')

@@ -23,7 +23,7 @@
             </p>
 
             <div class="mt-10 grid gap-6 md:grid-cols-2">
-                <section class="rounded-xl border border-gray-800 bg-gray-900 p-6">
+                <section class="rounded-xl border-2 border-gray-800 bg-gray-900 p-6">
                     <h2 class="text-xl font-semibold text-white">¿Sos cliente?</h2>
                     <p class="mt-2 text-sm text-gray-400">
                         Escaneá el código QR de tu mesa con la cámara para ver el menú.
@@ -50,11 +50,11 @@
                                 placeholder="Código de mesa"
                                 required
                                 autocomplete="off"
-                                class="w-full rounded-lg border border-gray-700 bg-gray-800 px-3 py-2 text-sm text-gray-100 placeholder-gray-500 focus:border-gold-500 focus:outline-none focus:ring-1 focus:ring-gold-500"
+                                class="w-full rounded-lg border-2 border-gray-700 bg-gray-800 px-3 py-2 text-sm text-gray-100 placeholder-gray-500 focus:border-gold-500 focus:outline-none focus:ring-1 focus:ring-gold-500"
                             >
                             <button
                                 type="submit"
-                                class="shrink-0 rounded-lg border border-gold-600 px-4 py-2 text-sm font-semibold text-gold-400 hover:bg-gold-500/10 focus:outline-none focus:ring-2 focus:ring-gold-500 focus:ring-offset-2 focus:ring-offset-gray-950"
+                                class="shrink-0 rounded-lg border-2 border-gold-600 px-4 py-2 text-sm font-semibold text-gold-400 hover:bg-gold-500/10 focus:outline-none focus:ring-2 focus:ring-gold-500 focus:ring-offset-2 focus:ring-offset-gray-950"
                             >
                                 Ver menú
                             </button>
@@ -68,7 +68,7 @@
                             </p>
                             <div class="mt-2 grid grid-cols-2 gap-3 sm:grid-cols-3">
                                 @foreach ($qrCodes as $qr)
-                                    <figure class="flex flex-col items-center rounded-lg border border-gray-700 bg-gray-950 p-2">
+                                    <figure class="flex flex-col items-center rounded-lg border-2 border-gray-700 bg-gray-950 p-2">
                                         <img
                                             src="{{ url('/qr/menu/'.$qr->code) }}"
                                             alt="QR de la mesa {{ $qr->table->numero }}"
@@ -82,7 +82,7 @@
                     @endif
                 </section>
 
-                <section class="rounded-xl border border-gray-800 bg-gray-900 p-6">
+                <section class="rounded-xl border-2 border-gray-800 bg-gray-900 p-6">
                     <h2 class="text-xl font-semibold text-white">¿Sos parte del personal?</h2>
                     <p class="mt-2 text-sm text-gray-400">
                         Accedé al panel de administración, pedidos o cocina desde el inicio
@@ -100,7 +100,7 @@
                         <p class="text-xs font-medium uppercase tracking-wide text-gray-400">
                             QR de acceso del personal
                         </p>
-                        <figure class="mt-2 inline-flex flex-col items-center rounded-lg border border-gray-700 bg-gray-950 p-2">
+                        <figure class="mt-2 inline-flex flex-col items-center rounded-lg border-2 border-gray-700 bg-gray-950 p-2">
                             <img
                                 src="{{ url('/qr/personal') }}"
                                 alt="QR de acceso del personal"
@@ -114,7 +114,7 @@
         </main>
 
         <div id="scan-overlay" class="fixed inset-0 hidden flex-col items-center justify-center bg-black/85 p-4">
-            <div class="w-full max-w-md rounded-xl border border-gray-800 bg-gray-900 p-6 shadow-xl">
+            <div class="w-full max-w-md rounded-xl border-2 border-gray-800 bg-gray-900 p-6 shadow-xl">
                 <div class="mb-4 flex items-center justify-between">
                     <h2 class="text-lg font-semibold text-white">Escanear QR</h2>
                     <button

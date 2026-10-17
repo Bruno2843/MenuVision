@@ -21,7 +21,7 @@
                 type="button"
                 data-waiter-scan-close
                 aria-label="Cerrar"
-                class="rounded-lg px-3 py-2 text-sm text-gray-300 transition hover:bg-gray-800"
+                class="rounded-lg px-3 py-2 text-sm text-cocina-gris transition hover:bg-cocina-panel"
             >
                 ✕
             </button>
@@ -35,7 +35,7 @@
             class="aspect-square w-full max-h-[60vh] rounded-xl bg-black object-cover"
         ></video>
 
-        <p data-waiter-scan-status class="mt-4 text-sm text-gray-300" role="status">
+        <p data-waiter-scan-status class="mt-4 text-sm text-cocina-gris" role="status">
             Apuntá la cámara al código QR de la mesa.
         </p>
 
@@ -43,7 +43,7 @@
             <button
                 type="button"
                 data-waiter-scan-close
-                class="rounded-lg border border-gray-700 px-4 py-2 text-sm font-medium text-gray-300 transition hover:bg-gray-800"
+                class="rounded-lg border-2 border-cocina-amarillo/40 px-4 py-2 text-sm font-medium text-cocina-gris transition hover:bg-cocina-panel"
             >
                 Cancelar
             </button>
@@ -60,11 +60,11 @@
                     name="codigo"
                     autocomplete="off"
                     placeholder="O escribí el código"
-                    class="w-full rounded-lg border border-gray-700 bg-gray-800 px-3 py-2 text-sm text-gray-100 placeholder-gray-500 focus:border-gold-500 focus:outline-none focus:ring-1 focus:ring-gold-500"
+                    class="w-full rounded-lg border-2 border-cocina-amarillo/30 bg-cocina-fondo px-3 py-2 text-sm text-white placeholder-cocina-gris/70 focus:border-cocina-amarillo focus:outline-none focus:ring-1 focus:ring-cocina-amarillo"
                 >
                 <button
                     type="submit"
-                    class="shrink-0 rounded-lg bg-gold-500 px-4 py-2 text-sm font-semibold text-black transition hover:bg-gold-600"
+                    class="shrink-0 rounded-lg bg-cocina-amarillo px-4 py-2 text-sm font-semibold text-black transition hover:brightness-110"
                 >
                     Ir
                 </button>
