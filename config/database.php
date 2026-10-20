@@ -44,6 +44,30 @@ return [
             'transaction_mode' => 'DEFERRED',
         ],
 
+        /*
+         * A fixed handle on the local SQLite file, independent of the ambient
+         * `DB_*` variables.
+         *
+         * The export command needs to read SQLite while the destination
+         * PostgreSQL credentials sit in the environment. Pointing it at the
+         * ordinary `sqlite` connection would be fragile: a single `DB_DATABASE`
+         * is read by both raw drivers, and running the export with PostgreSQL
+         * variables set would make the SQLite connection try to open the
+         * PostgreSQL database name as a file. This connection ignores `DB_*`
+         * entirely and always means the local file.
+         */
+        'sqlite_local' => [
+            'driver' => 'sqlite',
+            'url' => null,
+            'database' => env('EXPORT_SOURCE_DATABASE', database_path('database.sqlite')),
+            'prefix' => '',
+            'foreign_key_constraints' => true,
+            'busy_timeout' => null,
+            'journal_mode' => null,
+            'synchronous' => null,
+            'transaction_mode' => 'DEFERRED',
+        ],
+
         'mysql' => [
             'driver' => 'mysql',
             'url' => env('DB_URL'),

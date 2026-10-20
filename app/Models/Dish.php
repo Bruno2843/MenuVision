@@ -21,8 +21,10 @@ class Dish extends Model
     use HasFactory;
 
     /**
-     * Disk holding the photographs. It is the public disk so the browser can
-     * fetch them directly, the same reason the 3D models live there.
+     * Default disk holding the photographs. It is the public disk so the
+     * browser can fetch them directly, the same reason the 3D models live
+     * there. The disk actually used is resolved by {@see static::disco()}, so
+     * production can point it at Supabase Storage without touching the code.
      */
     public const DISCO = 'public';
 
@@ -77,7 +79,7 @@ class Dish extends Model
             return null;
         }
 
-        return Storage::disk(static::DISCO)->url($this->rutaImagenEnDisco());
+        return Storage::disk(static::disco())->url($this->rutaImagenEnDisco());
     }
 
     /**
@@ -86,7 +88,16 @@ class Dish extends Model
     public function tieneImagen(): bool
     {
         return filled($ruta = $this->rutaImagenEnDisco())
-            && Storage::disk(static::DISCO)->exists($ruta);
+            && Storage::disk(static::disco())->exists($ruta);
+    }
+
+    /**
+     * The disk the photographs are stored on, as configured for this
+     * environment: `public` locally, `supabase` in production.
+     */
+    public static function disco(): string
+    {
+        return (string) config('menuvision.disk', static::DISCO);
     }
 
     /**

@@ -25,3 +25,9 @@ _ide_helper.php
 Homestead.json
 Homestead.yaml
 Thumbs.db
+
+# Local scratch that must never be committed: a throwaway clone of the remote,
+# and loose image files dropped into the project root.
+/MenuVision-remote
+/icono
+/ChatGPT Image 14 sept 2026, 16_15_16.png

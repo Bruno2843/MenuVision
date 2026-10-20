@@ -58,6 +58,37 @@ return [
             'report' => false,
         ],
 
+        /*
+         * Supabase Storage speaks the S3 protocol, so the regular S3 driver is
+         * enough. It is only used when MENUVISION_DISK=supabase.
+         *
+         * Two details differ from AWS and are easy to get wrong:
+         *
+         * - `use_path_style_endpoint` must be true: Supabase serves the bucket
+         *   in the path, not in the host name.
+         * - `url` has to be the public object prefix of the bucket, not the S3
+         *   endpoint. The endpoint (`.../storage/v1/s3`) requires signed
+         *   requests and a browser cannot use it directly. The public prefix is
+         *   `https://<ref>.supabase.co/storage/v1/object/public/<bucket>`, and
+         *   it only works when the bucket is public for reads. Writes and
+         *   deletes still go through the authenticated S3 endpoint.
+         *
+         * `throw` is on so a failed upload raises instead of returning false and
+         * leaving a row pointing at a file that was never written.
+         */
+        'supabase' => [
+            'driver' => 's3',
+            'key' => env('AWS_ACCESS_KEY_ID'),
+            'secret' => env('AWS_SECRET_ACCESS_KEY'),
+            'region' => env('AWS_DEFAULT_REGION'),
+            'bucket' => env('AWS_BUCKET'),
+            'url' => env('AWS_URL'),
+            'endpoint' => env('AWS_ENDPOINT'),
+            'use_path_style_endpoint' => env('AWS_USE_PATH_STYLE_ENDPOINT', true),
+            'throw' => true,
+            'report' => false,
+        ],
+
         's3' => [
             'driver' => 's3',
             'key' => env('AWS_ACCESS_KEY_ID'),

@@ -29,4 +29,23 @@ return [
 
     'qr_base_url' => (string) env('QR_BASE_URL', ''),
 
+    /*
+    |--------------------------------------------------------------------------
+    | Disk for Dish Media
+    |--------------------------------------------------------------------------
+    |
+    | Photographs and 3D models of dishes are written to this disk, and every
+    | URL the menu renders is resolved through it. Local development keeps the
+    | `public` disk, whose files live under `storage/app/public` and are served
+    | through the `/storage` symlink. Production points it at `supabase`, an S3
+    | compatible disk, so the files survive a redeploy of the container and the
+    | phone can load them from anywhere.
+    |
+    | The disk name lives here instead of in the code because the same build
+    | runs in both places: only the environment decides where the bytes land.
+    |
+    */
+
+    'disk' => (string) env('MENUVISION_DISK', 'public'),
+
 ];

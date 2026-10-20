@@ -33,7 +33,7 @@ class DishController extends Controller
             )
             ->when(
                 $request->filled('buscar'),
-                fn (Builder $query) => $query->where('nombre', 'like', '%'.$request->string('buscar').'%'),
+                fn (Builder $query) => $query->whereLike('nombre', '%'.$request->string('buscar').'%'),
             )
             ->get();
 

@@ -38,5 +38,13 @@
         <env name="PULSE_ENABLED" value="false"/>
         <env name="TELESCOPE_ENABLED" value="false"/>
         <env name="NIGHTWATCH_ENABLED" value="false"/>
+        <!-- Destination for the SQLite -> PostgreSQL export tests. Left empty by
+             default so those tests skip; set them (or export the same names in
+             the shell) to run them against a disposable PostgreSQL. -->
+        <env name="EXPORT_TEST_PG_HOST" value=""/>
+        <env name="EXPORT_TEST_PG_PORT" value="5432"/>
+        <env name="EXPORT_TEST_PG_DATABASE" value="postgres"/>
+        <env name="EXPORT_TEST_PG_USERNAME" value="postgres"/>
+        <env name="EXPORT_TEST_PG_PASSWORD" value=""/>
     </php>
 </phpunit>

@@ -5,6 +5,7 @@ Before planning or editing, find the row whose globs match the file's path and r
 | Applies to | Rule file |
 | --- | --- |
 | resources/views/admin/**/*.blade.php | .ai/rules/admin.md |
+| app/Console/Commands/** | .ai/rules/commands.md |
 | config/filesystems.php | .ai/rules/config.md |
 | app/Http/Controllers/Admin/UserController.php, app/Http/Controllers/Admin/TableController.php | .ai/rules/controllers-admin.md |
 | app/Http/Controllers/**/*.php | .ai/rules/controllers.md |

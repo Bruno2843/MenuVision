@@ -167,6 +167,22 @@ class AdminMenuManagementTest extends TestCase
             ->assertDontSee('Pizza napolitana');
     }
 
+    public function test_the_dish_search_ignores_case_on_both_databases(): void
+    {
+        $pizzas = Category::factory()->create(['nombre' => 'Pizzas']);
+        Dish::factory()->for($pizzas)->create(['nombre' => 'Milanesa napolitana']);
+        Dish::factory()->for($pizzas)->create(['nombre' => 'Tiramisú']);
+
+        // SQLite compares `like` without case, PostgreSQL's `like` is case
+        // sensitive. `whereLike` lets each grammar pick the operator, so the
+        // same lowercase search finds "Milanesa" on both engines.
+        $this->actingAs(User::factory()->admin()->create())
+            ->get(route('admin.dishes.index', ['buscar' => 'milanesa']))
+            ->assertOk()
+            ->assertSee('Milanesa napolitana')
+            ->assertDontSee('Tiramisú');
+    }
+
     public function test_a_dish_that_belongs_to_an_order_cannot_be_deleted(): void
     {
         $order = Order::factory()->create();

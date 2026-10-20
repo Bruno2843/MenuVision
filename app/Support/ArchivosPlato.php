@@ -40,9 +40,9 @@ class ArchivosPlato
      */
     public static function prepararImagen(Dish $dish, UploadedFile $archivo): ArchivoPendiente
     {
-        $pendiente = ArchivoPendiente::para(static::rutaImagen($dish, $archivo->guessExtension() ?: 'jpg'));
+        $pendiente = ArchivoPendiente::para(static::rutaImagen($dish, $archivo->guessExtension() ?: 'jpg'), Dish::disco());
 
-        Storage::disk(Dish::DISCO)->put($pendiente->rutaParcial, file_get_contents($archivo->getRealPath()));
+        Storage::disk($pendiente->disco)->put($pendiente->rutaParcial, file_get_contents($archivo->getRealPath()));
 
         return $pendiente;
     }
@@ -52,9 +52,9 @@ class ArchivosPlato
      */
     public static function prepararModelo(Dish $dish, UploadedFile $archivo): ArchivoPendiente
     {
-        $pendiente = ArchivoPendiente::para(static::rutaModelo($dish));
+        $pendiente = ArchivoPendiente::para(static::rutaModelo($dish), Model3D::disco());
 
-        Storage::disk(Model3D::DISCO)->put($pendiente->rutaParcial, file_get_contents($archivo->getRealPath()));
+        Storage::disk($pendiente->disco)->put($pendiente->rutaParcial, file_get_contents($archivo->getRealPath()));
 
         return $pendiente;
     }
@@ -69,11 +69,11 @@ class ArchivosPlato
      */
     public static function confirmar(ArchivoPendiente $pendiente): void
     {
-        if (! Storage::disk(Dish::DISCO)->exists($pendiente->rutaParcial)) {
+        if (! Storage::disk($pendiente->disco)->exists($pendiente->rutaParcial)) {
             return;
         }
 
-        Storage::disk(Dish::DISCO)->move($pendiente->rutaParcial, $pendiente->rutaFinal);
+        Storage::disk($pendiente->disco)->move($pendiente->rutaParcial, $pendiente->rutaFinal);
     }
 
     /**
@@ -135,7 +135,7 @@ class ArchivosPlato
             return;
         }
 
-        Storage::disk(Dish::DISCO)->delete($ruta);
+        Storage::disk(Dish::disco())->delete($ruta);
     }
 
     /**

@@ -22,8 +22,10 @@ class Model3D extends Model
     use HasFactory;
 
     /**
-     * Disk holding the models. It is the public disk so the browser can fetch
-     * the `.glb` directly, and so no private server path is ever exposed.
+     * Default disk holding the models. It is the public disk so the browser can
+     * fetch the `.glb` directly, and so no private server path is ever exposed.
+     * The disk actually used is resolved by {@see static::disco()}, so
+     * production can point it at Supabase Storage without touching the code.
      */
     public const DISCO = 'public';
 
@@ -46,7 +48,16 @@ class Model3D extends Model
      */
     public function url(): string
     {
-        return Storage::disk(static::DISCO)->url($this->archivo);
+        return Storage::disk(static::disco())->url($this->archivo);
+    }
+
+    /**
+     * The disk the models are stored on, as configured for this environment:
+     * `public` locally, `supabase` in production.
+     */
+    public static function disco(): string
+    {
+        return (string) config('menuvision.disk', static::DISCO);
     }
 
     /**
@@ -59,6 +70,6 @@ class Model3D extends Model
     public function existe(): bool
     {
         return filled($this->archivo)
-            && Storage::disk(static::DISCO)->exists($this->archivo);
+            && Storage::disk(static::disco())->exists($this->archivo);
     }
 }
